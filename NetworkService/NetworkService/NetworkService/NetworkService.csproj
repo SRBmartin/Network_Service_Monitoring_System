@@ -35,8 +35,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.39\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
+    <Reference Include="Notification.Wpf, Version=8.0.0.0, Culture=neutral, PublicKeyToken=1acac493089262b5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Notification.Wpf.8.0.0\lib\net47\Notification.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -55,7 +66,28 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Helpers\BindableBase.cs" />
+    <Compile Include="Helpers\MyICommand.cs" />
+    <Compile Include="Helpers\StyleConverters\UndoStyleConverter.cs" />
+    <Compile Include="Helpers\UndoActionHolder.cs" />
+    <Compile Include="Helpers\ValidationBase.cs" />
+    <Compile Include="Helpers\ValidationErrors.cs" />
+    <Compile Include="Model\MeterType.cs" />
+    <Compile Include="Model\PowerConsumption.cs" />
+    <Compile Include="Model\Terminal.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\NetworkEntityViewModel.cs" />
+    <Compile Include="ViewModel\StartingViewModel.cs" />
+    <Compile Include="ViewModel\TerminalViewModel.cs" />
+    <Compile Include="Views\NetworkEntityView.xaml.cs">
+      <DependentUpon>NetworkEntityView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StartingView.xaml.cs">
+      <DependentUpon>StartingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TerminalView.xaml.cs">
+      <DependentUpon>TerminalView.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -68,6 +100,18 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\NetworkEntityView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StartingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TerminalView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -87,17 +131,43 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Resource Include="Resource\Fonts\TerminalFont.ttc" />
+    <Resource Include="Resource\Fonts\PopupFont.ttf" />
+    <Resource Include="Resource\Fonts\SubheadingFont.otf" />
+    <Resource Include="Resource\Fonts\HeadingFont.ttf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Model\" />
-    <Folder Include="Views\" />
+    <Resource Include="Resource\Images\nev.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Images\mgv.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Images\ndv.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Images\exit_active.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Images\exit_inactive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Images\undo_inactive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Images\undo_active.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Images\undo_unavailable.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
