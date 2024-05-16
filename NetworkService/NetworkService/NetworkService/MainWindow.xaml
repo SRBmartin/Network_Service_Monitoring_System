@@ -5,8 +5,236 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NetworkService"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        xmlns:viewModel="clr-namespace:NetworkService.ViewModel"
+        xmlns:views="clr-namespace:NetworkService.Views"
+        xmlns:styleConverters="clr-namespace:NetworkService.Helpers.StyleConverters"
+        xmlns:notifications="clr-namespace:Notification.Wpf.Controls;assembly=Notification.Wpf"
+        Name="MainWindowReference"
+        Title="MainWindow"
+        Height="700"
+        Width="800"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None">
+    <Window.DataContext>
+        <viewModel:MainWindowViewModel />
+    </Window.DataContext>
+
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModel:StartingViewModel}">
+            <views:StartingView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:TerminalViewModel}">
+            <views:TerminalView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:NetworkEntityViewModel}">
+            <views:NetworkEntityView />
+        </DataTemplate>
+        <styleConverters:UndoStyleConverter x:Key="UndoStyleConverter" />
+    </Window.Resources>
+    
     <Grid>
-        
+        <notifications:NotificationArea 
+            x:Name="WindowNotificationArea"
+            Panel.ZIndex="500"
+            MaxItems="2"
+            Position="TopRight"
+            />
+        <Border Background="{StaticResource UIPrimaryColor}" CornerRadius="30" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="400" />
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="50"  />
+                <ColumnDefinition Width="50"  />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"  />
+                <RowDefinition Height="400" />
+                <RowDefinition Height="200" />
+                <RowDefinition Height="50"  />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Grid.Column="1">
+                <Border
+                    Margin="5"
+                    Background="{StaticResource UISecondaryColor}"
+                    CornerRadius="20">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="78" />
+                            <ColumnDefinition Width="78" />
+                            <ColumnDefinition Width="78" />
+                            <ColumnDefinition Width="78" />
+                            <ColumnDefinition Width="78" />
+                        </Grid.ColumnDefinitions>
+                        <!-- NETWORK ENTITY NAVBAR BUTTON -->
+                        <Button
+                            x:Name="NetworkEntitiesViewButton"
+                            Grid.Column="1"
+                            Command="{Binding NavigationCommand}"
+                            CommandParameter="NetworkEntityView"
+                            Cursor="Hand"
+                            Style="{StaticResource DockButtonStyle}"
+                            >
+                            <Button.Background>
+                                <ImageBrush
+                                    ImageSource="Resource/Images/nev.png"
+                                     Stretch="Uniform" />
+                            </Button.Background>
+                            <Popup
+                                Width="150"
+                                IsOpen="{Binding ElementName=NetworkEntitiesViewButton, Path=IsMouseOver, Mode=OneWay}"
+                                PlacementTarget="{Binding ElementName=NetworkEntitiesViewButton}"
+                                Style="{StaticResource PopupStyle}" >
+                                <Grid>
+                                    <Border Style="{StaticResource BorderStyle}">
+                                        <TextBlock
+                                            Style="{StaticResource PopupTextStyle}"
+                                            Text="Network Entities" />
+                                    </Border>
+                                </Grid>
+                            </Popup>
+                        </Button>
+
+                        <!-- NETWORK DISPLAY NAVBAR BUTTON -->
+                        <Button
+                            x:Name="NetworkDisplayViewButton"
+                            Grid.Column="2"
+                            Command=""
+                            CommandParameter="NetworkDisplayView"
+                            Cursor="Hand"
+                            Style="{StaticResource DockButtonStyle}">
+                            <Button.Background>
+                                <ImageBrush 
+                                    ImageSource="Resource/Images/ndv.png"
+                                    Stretch="Uniform" />
+                            </Button.Background>
+                            <Popup
+                                Width="140"
+                                IsOpen="{Binding ElementName=NetworkDisplayViewButton, Path=IsMouseOver, Mode=OneWay}"
+                                PlacementTarget="{Binding ElementName=NetworkDisplayViewButton}"
+                                Style="{StaticResource PopupStyle}">
+                                <Grid>
+                                    <Border Style="{StaticResource BorderStyle}">
+                                        <TextBlock
+                                            Style="{StaticResource PopupTextStyle}"
+                                            Text="Network Display" />
+                                    </Border>
+                                </Grid>
+                            </Popup>
+                        </Button>
+
+                        <!-- MEASUREMENT GRAPH NAVBAR BUTTON -->
+                        <Button
+                            x:Name="MeasurementGraphViewButton"
+                            Grid.Column="3"
+                            Command=""
+                            CommandParameter="MeasurementGraphView"
+                            Cursor="Hand"
+                            Style="{StaticResource DockButtonStyle}">
+                            <Button.Background>
+                                <ImageBrush
+                                    ImageSource="Resource/Images/mgv.png"
+                                    Stretch="Uniform" />
+                            </Button.Background>
+                            <Popup
+                                Width="160"
+                                IsOpen="{Binding ElementName=MeasurementGraphViewButton, Path=IsMouseOver, Mode=OneWay}"
+                                PlacementTarget="{Binding ElementName=MeasurementGraphViewButton}"
+                                Style="{StaticResource PopupStyle}" >
+                                <Grid>
+                                    <Border Style="{StaticResource BorderStyle}">
+                                        <TextBlock
+                                            Style="{StaticResource PopupTextStyle}"
+                                            Text="Measurement graph" />
+                                    </Border>
+                                </Grid>
+                            </Popup>
+                        </Button>
+                    </Grid>
+                </Border>
+
+            </Grid>
+
+            <!--  ADD CONTENT CONTROL FOR TERMINAL -->
+
+            <!-- EXIT BUTTON -->
+            <Button
+                x:Name="ExitButton"
+                Grid.Column="4"
+                Margin="0, 0, 5, 0"
+                Command="{Binding ExitAppCommand}"
+                CommandParameter="{Binding ElementName=MainWindowReference}"
+                Cursor="Hand"
+                Style="{StaticResource ExitButtonStyle}">
+                <Popup
+                    Width="40"
+                    IsOpen="{Binding ElementName=ExitButton, Path=IsMouseOver, Mode=OneWay}"
+                    PlacementTarget="{Binding ElementName=ExitButton}"
+                    Style="{StaticResource PopupStyle}">
+                    <Grid>
+                        <Border Style="{StaticResource BorderStyle}">
+                            <TextBlock
+                                Style="{StaticResource PopupTextStyle}"
+                                Text="Exit" />
+                        </Border>
+                    </Grid>
+                </Popup>
+            </Button>
+
+            <Button
+                x:Name="UndoButton"
+                Grid.Column="3"
+                Command=""
+                CommandParameter="{Binding ElementName=UndoButton}"
+                Style="{Binding UndoAction.ActionId, Converter={StaticResource UndoStyleConverter}}">
+                <Popup
+                    Width="40"
+                    IsOpen="{Binding ElementName=UndoButton, Path=IsMouseOver, Mode=OneWay}"
+                    PlacementTarget="{Binding ElementName=UndoButton}"
+                    Style="{StaticResource PopupStyle}">
+                    <Grid>
+                        <Border Style="{StaticResource BorderStyle}">
+                            <TextBlock
+                                Style="{StaticResource PopupTextStyle}"
+                                Text="Undo" />
+                        </Border>
+                    </Grid>
+                </Popup>
+            </Button>
+
+            <ContentControl
+                Grid.Row="1"
+                Grid.Column="0"
+                Grid.ColumnSpan="5"
+                Content="{Binding CurrentViewModel}" />
+            <ContentControl
+                Grid.Row="2"
+                Grid.Column="0"
+                Grid.ColumnSpan="5"
+                Margin="5"
+                Content="{Binding TerminalViewModel}"/>
+            <Border
+                Grid.Row="3"
+                Grid.Column="0"
+                Grid.ColumnSpan="5"
+                Margin="0"
+                CornerRadius="0, 0, 25, 25">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Offset="0" Color="#0BF7C873" />
+                        <GradientStop Offset="0.15" Color="#40F7C873" />
+                        <GradientStop Offset="0.4" Color="#70F7C873" />
+                        <GradientStop Offset="0.6" Color="#A0F7C873" />
+                        <GradientStop Offset="0.85" Color="#F7C873" />
+                        <GradientStop Offset="1" Color="#F7C873" />
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+        </Grid>
     </Grid>
 </Window>
