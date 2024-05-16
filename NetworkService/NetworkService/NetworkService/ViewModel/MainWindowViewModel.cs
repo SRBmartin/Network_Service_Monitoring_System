@@ -6,11 +6,21 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
+using NetworkService.Helpers;
 
 namespace NetworkService.ViewModel
 {
-    public class MainWindowViewModel
+    public class MainWindowViewModel : BindableBase
     {
+        public UndoActionHolder undoAction;
+        public StartingViewModel startingViewModel { get; set; }
+        private TerminalViewModel terminalViewModel;
+        private NetworkEntityViewModel networkEntityViewModel;
+        public MyICommand<Window> ExitAppCommand { get; private set; }
+        public MyICommand<string> NavigationCommand { get; private set; }
+
+        private BindableBase currentViewModel;
         private int count = 15; // Inicijalna vrednost broja objekata u sistemu
                                 // ######### ZAMENITI stvarnim brojem elemenata
                                 //           zavisno od broja entiteta u listi
@@ -18,6 +28,62 @@ namespace NetworkService.ViewModel
         public MainWindowViewModel()
         {
             createListener(); //Povezivanje sa serverskom aplikacijom
+            UndoAction = new UndoActionHolder();
+
+            ExitAppCommand = new MyICommand<Window>(ExitApp);
+            NavigationCommand = new MyICommand<string>(Navigate);
+
+            networkEntityViewModel = new NetworkEntityViewModel();
+            terminalViewModel = new TerminalViewModel();
+            startingViewModel = new StartingViewModel();
+            CurrentViewModel = startingViewModel;
+        }
+
+        public BindableBase CurrentViewModel
+        {
+            get
+            {
+                return currentViewModel;
+            }
+            set
+            {
+                SetProperty(ref currentViewModel, value);
+            }
+        }
+        public TerminalViewModel TerminalViewModel
+        {
+            get
+            {
+                return terminalViewModel;
+            }
+            set
+            {
+                SetProperty(ref terminalViewModel, value);
+            }
+        }
+
+        public NetworkEntityViewModel NetworkEntityViewModel
+        {
+            get
+            {
+                return networkEntityViewModel;
+            }
+            set
+            {
+                SetProperty(ref  networkEntityViewModel, value);
+            }
+        }
+
+        public UndoActionHolder UndoAction
+        {
+            get
+            {
+                return undoAction;
+            }
+            set
+            {
+                SetProperty(ref undoAction, value);
+            }
         }
 
         private void createListener()
@@ -68,5 +134,30 @@ namespace NetworkService.ViewModel
             listeningThread.IsBackground = true;
             listeningThread.Start();
         }
+
+        private void Navigate(string pageName)
+        {
+            {
+                switch (pageName)
+                {
+                    case "NetworkEntityView":
+                        CurrentViewModel = networkEntityViewModel;
+                        break;
+                    case "NetworkDisplayView":
+
+                        break;
+
+                    case "MeasurementGraphView":
+
+                        break;
+                }
+            }
+        }
+
+        private void ExitApp(Window toClose)
+        {
+            toClose.Close();
+        }
+        
     }
 }
