@@ -144,7 +144,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resource\Images\IntervalMeter.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resource\Images\nev.png" />
   </ItemGroup>
@@ -168,6 +170,33 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resource\Images\undo_unavailable.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Images\SmartMeter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Images\FilterOffActive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Images\FilterOnActive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Images\FilterOnInactive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Images\FilterOffInactive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Images\AddInactive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Images\AddActive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Images\DeleteInactive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Images\DeleteActive.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

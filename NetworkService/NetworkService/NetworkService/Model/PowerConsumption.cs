@@ -13,7 +13,7 @@ namespace NetworkService.Model
         private string name;
         private double value;
         MeterType type;
-        public PowerConsumption(int id, string name, MeterType type)
+        public PowerConsumption(int id, string name, MeterType type, double value)
         {
             this.id = id;
             this.name = name;

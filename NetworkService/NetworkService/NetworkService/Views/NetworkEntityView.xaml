@@ -14,8 +14,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="200" />
-            <RowDefinition Height="50" />
-            <RowDefinition Height="150" />
+            <RowDefinition Height="200" />
         </Grid.RowDefinitions>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -23,25 +22,236 @@
                 <ColumnDefinition Width="400" />
             </Grid.ColumnDefinitions>
             <DataGrid 
-                Margin="5"
+                Margin="10"
+                Grid.ColumnSpan="2"
                 ItemsSource="{Binding Entities}"
                 AutoGenerateColumns="False"
                 Style="{StaticResource DataGridNetworkEntities}"
                 ColumnHeaderStyle="{StaticResource DataGridNetworkEntitiesColumnHeaderStyle}">
                 <DataGrid.Columns>
-                    <DataGridTemplateColumn Header="  Image" Width="70">
+                    <DataGridTemplateColumn Header="  Image" Width="100">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Image Source="{Binding Type.Img_Path}" Width="30" Height="30" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Header="ID" Width="30" Binding="{Binding Id}" />
-                    <DataGridTextColumn Header="Name" Width="125" Binding="{Binding Name}" />
-                    <DataGridTextColumn Header="Type Name" Width="110" Binding="{Binding Type.Name}" />
-                    <DataGridTextColumn Header="Value" Width="55" Binding="{Binding Value}" />
+                    <DataGridTextColumn Header="ID" Width="70" Binding="{Binding Id}" />
+                    <DataGridTextColumn Header="Name" Width="250" Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="Type Name" Width="210" Binding="{Binding Type.Name}" />
+                    <DataGridTextColumn Header="Value" Width="150" Binding="{Binding Value}" />
                 </DataGrid.Columns>
             </DataGrid>
+
+        </Grid>
+        <Grid 
+          Grid.Row="1"
+          Grid.Column="1"
+          Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="45" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="45" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ComboBox
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    Margin="5"
+                    ItemsSource="{Binding AvailableTypes}"
+                    SelectedItem="{Binding SelectedFilterMeterType}"
+                    DisplayMemberPath="Name"
+                    Style="{DynamicResource theComboBox}"
+                    ItemContainerStyle="{DynamicResource theComboBoxItem}" />
+
+            <Grid Margin="15" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="100" />
+                </Grid.ColumnDefinitions>
+                <RadioButton 
+                        Grid.Column="0"
+                        Content="&lt;"
+                        GroupName="FilterOptions"
+                        IsChecked="{Binding IsLessThanChecked, Mode=TwoWay}"
+                        Style="{StaticResource RadioButtonStyle}" />
+                <RadioButton 
+                        Grid.Column="1"
+                        Content="&gt;"
+                        GroupName="FilterOptions"
+                        IsChecked="{Binding IsGreaterThanChecked, Mode=TwoWay}"
+                        Style="{StaticResource RadioButtonStyle}" />
+                <RadioButton 
+                        Grid.Column="2"
+                        Content="="
+                        IsChecked="{Binding IsEqualChecked, Mode=TwoWay}"
+                        Style="{StaticResource RadioButtonStyle}" />
+            </Grid>
+
+            <TextBox
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    Margin="5"
+                    Text="{Binding FilterIdString}"
+                    Style="{StaticResource TextBoxStyle}" />
+
+            <Button
+                    x:Name="FilterOnButton"
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Width="100"
+                    HorizontalAlignment="Center"
+                    Command=""
+                    Margin="5"
+                    Cursor="Hand"
+                    Background="{StaticResource UISecondaryColor}"
+                    Style="{StaticResource RoundedButtonStyleFilterOn}">
+                <Popup
+                        Width="90"
+                        IsOpen="{Binding ElementName=FilterOnButton, Path=IsMouseOver, Mode=OneWay}"
+                        PlacementTarget="{Binding ElementName=FilterOnButton}"
+                        Style="{StaticResource PopupStyle}">
+                    <Grid>
+                        <Border Style="{StaticResource BorderStyle}">
+                            <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Filter on" />
+                        </Border>
+                    </Grid>
+                </Popup>
+            </Button>
+
+            <Button
+                    x:Name="FilterOffButton"
+                    Grid.Row="3"
+                    Grid.Column="2"
+                    Width="100"
+                    HorizontalAlignment="Center"
+                    Command=""
+                    Margin="5"
+                    Cursor="Hand"
+                    Background="{StaticResource UISecondaryColor}"
+                    Style="{StaticResource RoundedButtonStyleFilterOff}">
+                <Popup
+                    Width="100"
+                    IsOpen="{Binding ElementName=FilterOffButton, Path=IsMouseOver, Mode=OneWay}"
+                    PlacementTarget="{Binding ElementName=FilterOffButton}"
+                    Style="{StaticResource PopupStyle}">
+                    <Grid>
+                        <Border Style="{StaticResource BorderStyle}">
+                            <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Filter off" />
+                        </Border>
+                    </Grid>
+                </Popup>
+            </Button>
+            <Grid
+                Grid.Row="0"
+                Grid.Column="3"
+                Grid.RowSpan="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="40" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="150" />
+                    <ColumnDefinition Width="150" />
+                    <ColumnDefinition Width="40" />
+                </Grid.ColumnDefinitions>
+                <ComboBox
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    Margin="5"
+                    ItemsSource="{Binding AvailableTypes}"
+                    SelectedItem="{Binding SelectedAddingMeterType}"
+                    DisplayMemberPath="Name"
+                    Style="{DynamicResource theComboBox}"
+                    ItemContainerStyle="{DynamicResource theComboBoxItem}" />
+
+                <TextBox
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    Margin="5"
+                    Text="{Binding FilterIdString}"
+                    Style="{StaticResource TextBoxStyle}" />
+
+                <TextBox
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="2"
+                    Margin="5"
+                    Text="{Binding AddingNameString}"
+                    Style="{StaticResource TextBoxStyle}" />
+
+                <Button
+                    x:Name="AddingNewButton"
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Width="100"
+                    HorizontalAlignment="Center"
+                    Command=""
+                    Margin="2"
+                    Cursor="Hand"
+                    Background="{StaticResource UISecondaryColor}"
+                    Style="{StaticResource RoundedButtonStyleAddNew}">
+                    <Popup
+                        Width="100"
+                        IsOpen="{Binding ElementName=AddingNewButton, Path=IsMouseOver, Mode=OneWay}"
+                        PlacementTarget="{Binding ElementName=AddingNewButton}"
+                        Style="{StaticResource PopupStyle}">
+                        <Grid>
+                            <Border Style="{StaticResource BorderStyle}">
+                                <TextBlock
+                                    Style="{StaticResource PopupTextStyle}"
+                                    Text="Add new" />
+                            </Border>
+                        </Grid>
+                    </Popup>
+                </Button>
+
+                <Button
+                    x:Name="DeleteButton"
+                    Grid.Row="3"
+                    Grid.Column="2"
+                    Width="100"
+                    HorizontalAlignment="Center"
+                    Command=""
+                    Margin="2"
+                    Cursor="Hand"
+                    Background="{StaticResource UISecondaryColor}"
+                    Style="{StaticResource RoundedButtonStyleDelete}">
+                    <Popup
+                        Width="140"
+                        IsOpen="{Binding ElementName=DeleteButton, Path=IsMouseOver, Mode=OneWay}"
+                        PlacementTarget="{Binding ElementName=DeleteButton}"
+                        Style="{StaticResource PopupStyle}">
+                        <Grid>
+                            <Border Style="{StaticResource BorderStyle}">
+                                <TextBlock
+                                    Style="{StaticResource PopupTextStyle}"
+                                    Text="Delete selected" />
+                            </Border>
+                        </Grid>
+                    </Popup>
+                </Button>
+
+            </Grid>
         </Grid>
     </Grid>
 </UserControl>
