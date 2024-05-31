@@ -35,8 +35,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.39\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
+    <Reference Include="MVVMLight.Messaging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MVVMLight.Messaging.1.0.0.0\lib\net40\MVVMLight.Messaging.dll</HintPath>
     </Reference>
     <Reference Include="Notification.Wpf, Version=8.0.0.0, Culture=neutral, PublicKeyToken=1acac493089262b5, processorArchitecture=MSIL">
       <HintPath>..\packages\Notification.Wpf.8.0.0\lib\net47\Notification.Wpf.dll</HintPath>
@@ -44,10 +50,15 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
+    <Reference Include="System.Text.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -67,18 +78,33 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Helpers\BindableBase.cs" />
+    <Compile Include="Helpers\Common\ConfirmationService.cs" />
+    <Compile Include="Helpers\Common\FilterHandler.cs" />
+    <Compile Include="Helpers\Common\NotificationHandler.cs" />
+    <Compile Include="Helpers\Common\SerializationHandler.cs" />
+    <Compile Include="Helpers\Common\TreeViewSelectionBehaviour.cs" />
+    <Compile Include="Helpers\Interface\IConfirmationService.cs" />
     <Compile Include="Helpers\MyICommand.cs" />
     <Compile Include="Helpers\StyleConverters\UndoStyleConverter.cs" />
+    <Compile Include="Helpers\Styles\DisplayCardVisualRepresentation.cs" />
     <Compile Include="Helpers\UndoActionHolder.cs" />
+    <Compile Include="Helpers\Undo\UndoAdd.cs" />
     <Compile Include="Helpers\ValidationBase.cs" />
     <Compile Include="Helpers\ValidationErrors.cs" />
+    <Compile Include="Model\EntitiesByType.cs" />
+    <Compile Include="Model\EntityMeasurement.cs" />
+    <Compile Include="Model\LinesHolder.cs" />
     <Compile Include="Model\MeterType.cs" />
     <Compile Include="Model\PowerConsumption.cs" />
     <Compile Include="Model\Terminal.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\NetworkDisplayViewModel.cs" />
     <Compile Include="ViewModel\NetworkEntityViewModel.cs" />
     <Compile Include="ViewModel\StartingViewModel.cs" />
     <Compile Include="ViewModel\TerminalViewModel.cs" />
+    <Compile Include="Views\NetworkDisplayView.xaml.cs">
+      <DependentUpon>NetworkDisplayView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\NetworkEntityView.xaml.cs">
       <DependentUpon>NetworkEntityView.xaml</DependentUpon>
     </Compile>
@@ -100,6 +126,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\NetworkDisplayView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\NetworkEntityView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -136,6 +166,9 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Resource\json\cardEntities.json" />
+    <None Include="Resource\json\entities.json" />
+    <None Include="Resource\json\linesConnections.json" />
     <Resource Include="Resource\Fonts\TerminalFont.ttc" />
     <Resource Include="Resource\Fonts\PopupFont.ttf" />
     <Resource Include="Resource\Fonts\SubheadingFont.otf" />
@@ -197,6 +230,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resource\Images\DeleteActive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Images\Error.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Images\DeleteDisplay.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Images\NotExists.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Images\ConnectArrow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

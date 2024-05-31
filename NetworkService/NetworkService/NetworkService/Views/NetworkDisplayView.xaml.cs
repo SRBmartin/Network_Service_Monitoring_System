@@ -16,18 +16,13 @@ using System.Windows.Shapes;
 namespace NetworkService.Views
 {
     /// <summary>
-    /// Interaction logic for NetworkEntityView.xaml
+    /// Interaction logic for NetworkDisplayView.xaml
     /// </summary>
-    public partial class NetworkEntityView : UserControl
+    public partial class NetworkDisplayView : UserControl
     {
-        public NetworkEntityView()
+        public NetworkDisplayView()
         {
             InitializeComponent();
-        }
-
-        private void AddNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
         }
     }
 }

@@ -32,6 +32,9 @@
         <DataTemplate DataType="{x:Type viewModel:NetworkEntityViewModel}">
             <views:NetworkEntityView />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:NetworkDisplayViewModel}">
+            <views:NetworkDisplayView />
+        </DataTemplate>
         <styleConverters:UndoStyleConverter x:Key="UndoStyleConverter" />
     </Window.Resources>
     
@@ -104,7 +107,7 @@
                         <Button
                             x:Name="NetworkDisplayViewButton"
                             Grid.Column="2"
-                            Command=""
+                            Command="{Binding NavigationCommand}"
                             CommandParameter="NetworkDisplayView"
                             Cursor="Hand"
                             Style="{StaticResource DockButtonStyle}">
@@ -189,8 +192,7 @@
             <Button
                 x:Name="UndoButton"
                 Grid.Column="3"
-                Command=""
-                CommandParameter="{Binding ElementName=UndoButton}"
+                Command="{Binding UndoActionCommand}"
                 Style="{Binding UndoAction.ActionId, Converter={StaticResource UndoStyleConverter}}">
                 <Popup
                     Width="40"

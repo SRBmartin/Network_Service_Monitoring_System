@@ -4,6 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:viewModel="clr-namespace:NetworkService.ViewModel"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
              xmlns:local="clr-namespace:NetworkService.Views"
              mc:Ignorable="d" 
              d:DesignHeight="400"
@@ -24,10 +26,16 @@
             <DataGrid 
                 Margin="10"
                 Grid.ColumnSpan="2"
-                ItemsSource="{Binding Entities}"
+                ItemsSource="{Binding FilteredEntities}"
+                SelectedItem="{Binding SelectedPowerConsumption}"
                 AutoGenerateColumns="False"
+                CanUserReorderColumns="False"
+                IsReadOnly="True"
                 Style="{StaticResource DataGridNetworkEntities}"
                 ColumnHeaderStyle="{StaticResource DataGridNetworkEntitiesColumnHeaderStyle}">
+                <DataGrid.InputBindings>
+                    <KeyBinding Key="Delete" Command="{Binding DeleteEntityCmd}" />
+                </DataGrid.InputBindings>
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Header="  Image" Width="100">
                         <DataGridTemplateColumn.CellTemplate>
@@ -67,12 +75,17 @@
                     Grid.ColumnSpan="2"
                     Margin="5"
                     ItemsSource="{Binding AvailableTypes}"
-                    SelectedItem="{Binding SelectedFilterMeterType}"
+                    SelectedItem="{Binding CurrentFilter.Type}"
                     DisplayMemberPath="Name"
                     Style="{DynamicResource theComboBox}"
                     ItemContainerStyle="{DynamicResource theComboBoxItem}" />
 
-            <Grid Margin="15" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+            <Grid
+                x:Name="FilterButtonsGroup"
+                Margin="15"
+                Grid.Row="1"
+                Grid.Column="1"
+                Grid.ColumnSpan="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="100" />
                     <ColumnDefinition Width="100" />
@@ -82,28 +95,85 @@
                         Grid.Column="0"
                         Content="&lt;"
                         GroupName="FilterOptions"
-                        IsChecked="{Binding IsLessThanChecked, Mode=TwoWay}"
+                        IsChecked="{Binding CurrentFilter.IsLessThan, Mode=TwoWay}"
                         Style="{StaticResource RadioButtonStyle}" />
                 <RadioButton 
                         Grid.Column="1"
                         Content="&gt;"
                         GroupName="FilterOptions"
-                        IsChecked="{Binding IsGreaterThanChecked, Mode=TwoWay}"
+                        IsChecked="{Binding CurrentFilter.IsGreaterThan, Mode=TwoWay}"
                         Style="{StaticResource RadioButtonStyle}" />
                 <RadioButton 
                         Grid.Column="2"
                         Content="="
-                        IsChecked="{Binding IsEqualChecked, Mode=TwoWay}"
+                        IsChecked="{Binding CurrentFilter.IsEqual, Mode=TwoWay}"
                         Style="{StaticResource RadioButtonStyle}" />
             </Grid>
 
+            <Image
+                x:Name="ButtonsFilterErrorIcon"
+                Grid.Row="1"
+                Grid.Column="0"
+                Width="40"
+                Source="pack://application:,,,/Resource/Images/Error.png"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Visibility="{Binding ButtonsFilterErrorVisibility}" />
+
+            <Popup
+                Width="280"
+                IsOpen="{Binding ElementName=ButtonsFilterErrorIcon, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=FilterButtonsGroup}"
+                Style="{StaticResource PopupStyle}">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}" Padding="5">
+                        <TextBlock 
+                            Style="{StaticResource PopupTextStyleError}"
+                            Text="{Binding CurrentFilter.ValidationErrors[Buttons]}"
+                            TextWrapping="Wrap"
+                            MaxHeight="100" />
+                    </Border>
+                </Grid>
+            </Popup>
+
             <TextBox
-                    Grid.Row="2"
-                    Grid.Column="1"
-                    Grid.ColumnSpan="2"
-                    Margin="5"
-                    Text="{Binding FilterIdString}"
-                    Style="{StaticResource TextBoxStyle}" />
+                x:Name="IdFilterTextBox"
+                Grid.Row="2"
+                Grid.Column="1"
+                Grid.ColumnSpan="2"
+                Margin="5"
+                Text="{Binding CurrentFilter.IdS, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Style="{StaticResource TextBoxStyle}" >
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Return" Command="{Binding FilterEntityCmd}" />
+                </TextBox.InputBindings>
+            </TextBox>
+
+            <Image
+                x:Name="IdFilterErrorIcon"
+                Grid.Row="2"
+                Grid.Column="0"
+                Width="40"
+                Source="pack://application:,,,/Resource/Images/Error.png"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Visibility="{Binding IdFilterErrorVisibility}" />
+
+            <Popup
+                Width="280"
+                IsOpen="{Binding ElementName=IdFilterErrorIcon, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=IdFilterTextBox}"
+                Style="{StaticResource PopupStyle}">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}" Padding="5">
+                        <TextBlock 
+                            Style="{StaticResource PopupTextStyleError}"
+                            Text="{Binding CurrentFilter.ValidationErrors[ID]}"
+                            TextWrapping="Wrap"
+                            MaxHeight="100" />
+                    </Border>
+                </Grid>
+            </Popup>
 
             <Button
                     x:Name="FilterOnButton"
@@ -111,7 +181,7 @@
                     Grid.Column="1"
                     Width="100"
                     HorizontalAlignment="Center"
-                    Command=""
+                    Command="{Binding FilterEntityCmd}"
                     Margin="5"
                     Cursor="Hand"
                     Background="{StaticResource UISecondaryColor}"
@@ -137,7 +207,7 @@
                     Grid.Column="2"
                     Width="100"
                     HorizontalAlignment="Center"
-                    Command=""
+                    Command="{Binding FilterOffEntityCmd}"
                     Margin="5"
                     Cursor="Hand"
                     Background="{StaticResource UISecondaryColor}"
@@ -173,31 +243,117 @@
                     <ColumnDefinition Width="40" />
                 </Grid.ColumnDefinitions>
                 <ComboBox
+                    x:Name="AddTypeComboBox"
                     Grid.Row="0"
                     Grid.Column="1"
                     Grid.ColumnSpan="2"
                     Margin="5"
                     ItemsSource="{Binding AvailableTypes}"
-                    SelectedItem="{Binding SelectedAddingMeterType}"
+                    SelectedItem="{Binding EnteredPowerConsumption.Type}"
                     DisplayMemberPath="Name"
                     Style="{DynamicResource theComboBox}"
                     ItemContainerStyle="{DynamicResource theComboBoxItem}" />
 
+                <Image
+                    x:Name="AddTypeErrorIcon"
+                    Grid.Row="0"
+                    Grid.Column="3"
+                    Source="pack://application:,,,/Resource/Images/Error.png"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Visibility="{Binding AddTypeErrorVisibility}" />
+
+                <Popup
+                    Width="280"
+                    IsOpen="{Binding ElementName=AddTypeErrorIcon, Path=IsMouseOver, Mode=OneWay}"
+                    PlacementTarget="{Binding ElementName=AddTypeComboBox}"
+                    Style="{StaticResource PopupStyle}">
+                    <Grid>
+                        <Border Style="{StaticResource BorderStyle}" Padding="5">
+                            <TextBlock 
+                                Style="{StaticResource PopupTextStyleError}"
+                                Text="{Binding EnteredPowerConsumption.ValidationErrors[Type]}"
+                                TextWrapping="Wrap"
+                                MaxHeight="100" />
+                        </Border>
+                    </Grid>
+                </Popup>
+
                 <TextBox
+                    x:Name="AddIDTextBox"
                     Grid.Row="1"
                     Grid.Column="1"
                     Grid.ColumnSpan="2"
                     Margin="5"
-                    Text="{Binding FilterIdString}"
-                    Style="{StaticResource TextBoxStyle}" />
+                    Text="{Binding EnteredPowerConsumption.IdS, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Style="{StaticResource TextBoxStyle}">
+                    <TextBox.InputBindings>
+                        <KeyBinding Key="Return" Command="{Binding AddNewEntityCmd}" />
+                    </TextBox.InputBindings>
+                </TextBox>
+
+                <Image
+                    x:Name="AddIdErrorIcon"
+                    Grid.Row="1"
+                    Grid.Column="3"
+                    Source="pack://application:,,,/Resource/Images/Error.png"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Visibility="{Binding IDErrorVisibility}" />
+
+                <Popup
+                    Width="280"
+                    IsOpen="{Binding ElementName=AddIdErrorIcon, Path=IsMouseOver, Mode=OneWay}"
+                    PlacementTarget="{Binding ElementName=AddIDTextBox}"
+                    Style="{StaticResource PopupStyle}">
+                    <Grid>
+                        <Border Style="{StaticResource BorderStyle}" Padding="5">
+                            <TextBlock 
+                                Style="{StaticResource PopupTextStyleError}"
+                                Text="{Binding EnteredPowerConsumption.ValidationErrors[ID]}"
+                                TextWrapping="Wrap"
+                                MaxHeight="100" />
+                        </Border>
+                    </Grid>
+                </Popup>
 
                 <TextBox
+                    x:Name="AddNameTextBox"
                     Grid.Row="2"
                     Grid.Column="1"
                     Grid.ColumnSpan="2"
                     Margin="5"
-                    Text="{Binding AddingNameString}"
-                    Style="{StaticResource TextBoxStyle}" />
+                    Text="{Binding EnteredPowerConsumption.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Style="{StaticResource TextBoxStyle}" >
+                    <TextBox.InputBindings>
+                        <KeyBinding Key="Return" Command="{Binding AddNewEntityCmd}" />
+                    </TextBox.InputBindings>
+                </TextBox>
+
+                <Image
+                    x:Name="AddNameIconError"
+                    Grid.Row="2"
+                    Grid.Column="3"
+                    Source="pack://application:,,,/Resource/Images/Error.png"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Visibility="{Binding AddNameErrorVisibility}" />
+
+                <Popup
+                    Width="280"
+                    IsOpen="{Binding ElementName=AddNameIconError, Path=IsMouseOver, Mode=OneWay}"
+                    PlacementTarget="{Binding ElementName=AddNameTextBox}"
+                    Style="{StaticResource PopupStyle}">
+                    <Grid>
+                        <Border Style="{StaticResource BorderStyle}" Padding="5">
+                            <TextBlock 
+                                Style="{StaticResource PopupTextStyleError}"
+                                Text="{Binding EnteredPowerConsumption.ValidationErrors[Name]}"
+                                TextWrapping="Wrap"
+                                MaxHeight="100" />
+                        </Border>
+                    </Grid>
+                </Popup>
 
                 <Button
                     x:Name="AddingNewButton"
@@ -205,7 +361,7 @@
                     Grid.Column="1"
                     Width="100"
                     HorizontalAlignment="Center"
-                    Command=""
+                    Command="{Binding AddNewEntityCmd}"
                     Margin="2"
                     Cursor="Hand"
                     Background="{StaticResource UISecondaryColor}"
@@ -231,7 +387,7 @@
                     Grid.Column="2"
                     Width="100"
                     HorizontalAlignment="Center"
-                    Command=""
+                    Command="{Binding DeleteEntityCmd}"
                     Margin="2"
                     Cursor="Hand"
                     Background="{StaticResource UISecondaryColor}"
