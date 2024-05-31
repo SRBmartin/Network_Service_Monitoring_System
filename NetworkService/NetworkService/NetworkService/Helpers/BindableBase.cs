@@ -25,5 +25,11 @@ namespace NetworkService.Helpers
         }
 
         public event PropertyChangedEventHandler PropertyChanged = delegate { };
+        public static event EventHandler<PropertyChangedEventArgs> StaticPropertyChanged;
+
+        protected static void OnStaticPropertyChanged(string propertyName)
+        {
+            StaticPropertyChanged?.Invoke(null, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }
