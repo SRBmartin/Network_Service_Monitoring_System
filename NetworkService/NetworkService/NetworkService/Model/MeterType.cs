@@ -1,6 +1,7 @@
 ﻿using NetworkService.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,6 +34,11 @@ namespace NetworkService.Model
                 img_path = value;
                 OnPropertyChanged("Img_Path");
             }
+        }
+
+        public static ObservableCollection<PowerConsumption> FilterByType(ObservableCollection<PowerConsumption> toFilter, string typeName)
+        {
+            return new ObservableCollection<PowerConsumption>(toFilter.Where(pc => pc.Type != null && pc.Type.Name.Equals(typeName)).ToList());
         }
     }
 }
