@@ -243,5 +243,11 @@
   <ItemGroup>
     <Resource Include="Resource\Images\ConnectArrow.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Images\Cancel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Images\AlarmWarning.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

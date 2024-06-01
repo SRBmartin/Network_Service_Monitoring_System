@@ -594,7 +594,6 @@
         </Style>
 
         <Style TargetType="Border" x:Key="RoundedBorderForNetworkDisplayGrid">
-            <Setter Property="Background" Value="{StaticResource UIAccentColor}" />
             <Setter Property="Margin" Value="10" />
             <Setter Property="CornerRadius" Value="25" />
             <Setter Property="BorderThickness" Value="0" />
@@ -614,6 +613,20 @@
             </Setter>
         </Style>
         <Style TargetType="Image" x:Key="RoundedImageConnectNetworkDisplay">
+            <Setter Property="Width" Value="14" />
+            <Setter Property="Height" Value="14" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0,3,0,0" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Clip">
+                <Setter.Value>
+                    <EllipseGeometry Center="7,7" RadiusX="7" RadiusY="7" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="Image" x:Key="RoundedImageAlarmWarningDisplay">
             <Setter Property="Width" Value="14" />
             <Setter Property="Height" Value="14" />
             <Setter Property="HorizontalAlignment" Value="Center" />
