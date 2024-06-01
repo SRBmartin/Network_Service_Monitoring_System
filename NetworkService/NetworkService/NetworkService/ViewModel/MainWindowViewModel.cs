@@ -164,15 +164,11 @@ namespace NetworkService.ViewModel
                         }
                         else
                         {
-                            //U suprotnom, server je poslao promenu stanja nekog objekta u sistemu
                             Console.WriteLine(incomming); //Na primer: "Entitet_1:272"
                             int index = int.Parse(incomming.Split(':')[0].Split('_')[1]);
                             float value = float.Parse(incomming.Split(':')[1]);
                             Entities[index].Value = value;
-                            //################ IMPLEMENTACIJA ####################
-                            // Obraditi poruku kako bi se dobile informacije o izmeni
-                            // Azuriranje potrebnih stvari u aplikaciji
-
+                            SerializationHandler.SerializeEntitiesToFile(Entities);
                         }
                     }, null);
                 }
@@ -228,6 +224,7 @@ namespace NetworkService.ViewModel
                                 Entities.Remove(toDelete);
                                 Messenger.Default.Send<PowerConsumption>(UndoAction.Entity);
                                 Messenger.Default.Send<bool>(true);
+                                SerializationHandler.SerializeEntitiesToFile(Entities);
                                 NotificationHandler.ShowToastNotification(NotificationHandler.CreateNotification(NotificationType.Success, "Undo", "Undo option was executed with success."));
                             }
                         }
@@ -242,6 +239,7 @@ namespace NetworkService.ViewModel
                             Entities.Add(undoAction.Entity);
                             Messenger.Default.Send<PowerConsumption>(UndoAction.Entity);
                             Messenger.Default.Send<bool>(true);
+                            SerializationHandler.SerializeEntitiesToFile(Entities);
                             NotificationHandler.ShowToastNotification(NotificationHandler.CreateNotification(NotificationType.Success, "Undo", "Undo option was executed with success."));
                         }
                         else

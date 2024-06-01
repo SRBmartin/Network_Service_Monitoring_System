@@ -14,20 +14,25 @@ namespace NetworkService.Model
         private string idS;
         private string name;
         private double value;
+        private string valueS;
         MeterType type;
+        public static readonly double MinValue = 0.34;
+        public static readonly double MaxValue = 2.73;
         public PowerConsumption() { }
         public PowerConsumption(string idS, string name, MeterType type)
         {
             this.idS = idS;
             this.name = name;
             this.type = type;
-            value = GetRandomNumberValue(0.01, 5.50);
+            value = Math.Round(GetRandomNumberValue(0.01, 5.50), 2);
+            ValueS = value.ToString();
         }
         public PowerConsumption(string idS, string name, MeterType type, double value)
         {
             this.idS = idS;
             this.name = name;
-            this.value = value;
+            this.value = Math.Round(value, 2);
+            ValueS = this.value.ToString();
             this.type = type;
         }
         public PowerConsumption(PowerConsumption powerConsumption)
@@ -35,7 +40,8 @@ namespace NetworkService.Model
             id = powerConsumption.id;
             idS = powerConsumption.idS;
             name = powerConsumption.name;
-            value = powerConsumption.value;
+            value = Math.Round(powerConsumption.value, 2);
+            ValueS = value.ToString();
             type = powerConsumption.type;
         }
 
@@ -86,8 +92,13 @@ namespace NetworkService.Model
                 }
                 else
                 {
-                    return value.ToString();
+                    return Math.Round(value, 2).ToString();
                 }
+            }
+            set
+            {
+                valueS = value;
+                OnPropertyChanged(nameof(ValueS));
             }
         }
         public MeterType Type
@@ -138,6 +149,15 @@ namespace NetworkService.Model
             Name = string.Empty;
             Value = -1;
             Type = new MeterType(string.Empty, "pack://application:,,,/Resource/Images/NotExists.png");
+        }
+        public void SetCardValue(PowerConsumption takeValues)
+        {
+            Id = takeValues.Id;
+            IdS = takeValues.IdS;
+            Name = takeValues.Name;
+            Type = takeValues.Type;
+            Value = takeValues.Value;
+            ValueS = takeValues.ValueS;
         }
         private double GetRandomNumberValue(double minimum, double maximum)
         {

@@ -12,6 +12,7 @@ using System.Linq;
 using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -42,6 +43,7 @@ namespace NetworkService.ViewModel
         private bool isMouseDown;
         private int selectedCardIndexFirst;
         private int selectedCardIndexSecond;
+        Thread t;
 
         private readonly string cardEntitiesSerializationPath = "../../Resource/json/cardEntities.json";
         private readonly string linesConnectionsSerializationPath = "../../Resource/json/linesConnections.json";
@@ -68,6 +70,9 @@ namespace NetworkService.ViewModel
             isMouseDown = false;
             selectedCardIndexFirst = -1;
             selectedCardIndexSecond = -1;
+            t = new Thread(Update);
+            t.IsBackground = true;
+            t.Start();
             Messenger.Default.Register<bool>(this, ReloadEntities);
         }
         public ObservableCollection<EntitiesByType> AllEntities
@@ -196,7 +201,14 @@ namespace NetworkService.ViewModel
         {
             if (reload)
             {
-                AllEntities.Clear();
+                try
+                {
+                    AllEntities.Clear();
+                }
+                catch (NotSupportedException)
+                {
+                    return; //preskociti jer se nekad duplira Thread bez ociglednog razloga i to je Slepi Thread
+                }
                 EntitiesByType intervalType = new EntitiesByType("Interval Meter");
                 EntitiesByType smartType = new EntitiesByType("Smart Meter");
                 foreach (PowerConsumption i in MainWindowViewModel.Entities)
@@ -306,7 +318,16 @@ namespace NetworkService.ViewModel
             if (CardsEntities[index].Id != -1)
             {
                 draggedItem = new PowerConsumption(cardsEntities[index]);
-                CardsVisual[index].StopConnecting();
+                if(selectedCardIndexFirst != -1)
+                {
+                    CardsVisual[selectedCardIndexFirst].StopConnecting();
+                    selectedCardIndexFirst = -1;
+                    if(selectedCardIndexSecond != -1)
+                    {
+                        CardsVisual[selectedCardIndexSecond].StopConnecting();
+                        selectedCardIndexSecond = -1;
+                    }
+                }
             }
             else
             {
@@ -422,7 +443,9 @@ namespace NetworkService.ViewModel
                     }
                     else
                     {
-                        Messenger.Default.Send<NotificationContent>(NotificationHandler.CreateNotification(NotificationType.Error, "Connect", "You can't connect the same entity."));
+                        Messenger.Default.Send<NotificationContent>(NotificationHandler.CreateNotification(NotificationType.Information, "Connect", "You cancelled connection of entities."));
+                        CardsVisual[selectedCardIndexFirst].StopConnecting();
+                        selectedCardIndexFirst = -1;
                     }
                 }
             }
@@ -521,7 +544,7 @@ namespace NetworkService.ViewModel
             {
                 if(selectedCardIndexFirst == index)
                 {
-                    //dodaj kao iksic umesto strelice
+                    CardsVisual[index].ProposeCancel();
                 }
                 else if (CardsEntities[index].Id != -1 && !LinesHolder.Any(lh => (lh.StartingEntity.Id == CardsEntities[index].Id && lh.EndingEntity.Id == CardsEntities[selectedCardIndexFirst].Id) ||
                                                                                  (lh.StartingEntity.Id == CardsEntities[selectedCardIndexFirst].Id && lh.EndingEntity.Id == CardsEntities[index].Id)))
@@ -538,13 +561,37 @@ namespace NetworkService.ViewModel
             {
                 if(selectedCardIndexFirst == index)
                 {
-                    //vrati na strelicu
+                    CardsVisual[index].StopCancelPropose();
                 }
                 else if (CardsEntities[index].Id != -1)
                 {
                     CardsVisual[index].StopConnecting();
                 }
             }
+        }
+
+        private void Update()
+        {
+            while (true)
+            {
+                Thread.Sleep(5000);
+                for (int i = 0; i < CardsEntities.Count; ++i)
+                {
+                    if (CardsEntities[i].Id != -1)
+                    {
+                        if (CardsEntities[i].Value != MainWindowViewModel.Entities.FirstOrDefault(pc => pc.Id == CardsEntities[i].Id).Value)
+                        {
+                            CardsEntities[i].Value = MainWindowViewModel.Entities.FirstOrDefault(pc => pc.Id == CardsEntities[i].Id).Value;
+                        }
+                    }
+                }
+                CheckAlarmingValues();
+            }
+        }
+
+        private void CheckAlarmingValues()
+        {
+
         }
 
     }
