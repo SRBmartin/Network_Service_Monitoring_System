@@ -78,6 +78,7 @@
                 Grid.Row="0"
                 Grid.Column="0"
                 Style="{StaticResource RoundedBorderForNetworkDisplayGrid}"
+                Background="{Binding CardsVisual[0].Background}"
                 AllowDrop="True">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
@@ -123,6 +124,9 @@
                                Style="{StaticResource RoundedImageConnectNetworkDisplay}"
                                Visibility="{Binding CardsVisual[0].ConnectArrowVisibility}"
                                Grid.Column="1" />
+                        <Image Source="pack://application:,,,/Resource/Images/AlarmWarning.png"
+                               Style="{StaticResource RoundedImageAlarmWarningDisplay}"
+                               Visibility="{Binding CardsVisual[0].AlarmVisibility}"/>
 
 
                     </Grid>
@@ -184,7 +188,9 @@
             <Border 
                 Grid.Row="0"
                 Grid.Column="1"
-                Style="{StaticResource RoundedBorderForNetworkDisplayGrid}">
+                Style="{StaticResource RoundedBorderForNetworkDisplayGrid}"
+                Background="{Binding CardsVisual[1].Background}"
+                AllowDrop="True" >
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
                         <i:InvokeCommandAction Command="{Binding DropOnCardCommand}" CommandParameter="1" />
@@ -229,6 +235,9 @@
                            Style="{StaticResource RoundedImageConnectNetworkDisplay}"
                            Visibility="{Binding CardsVisual[1].ConnectArrowVisibility}"
                            Grid.Column="1" />
+                        <Image Source="pack://application:,,,/Resource/Images/AlarmWarning.png"
+                               Style="{StaticResource RoundedImageAlarmWarningDisplay}"
+                               Visibility="{Binding CardsVisual[1].AlarmVisibility}"/>
 
 
                     </Grid>
@@ -290,7 +299,9 @@
             <Border 
                 Grid.Row="0"
                 Grid.Column="2"
-                Style="{StaticResource RoundedBorderForNetworkDisplayGrid}">
+                Style="{StaticResource RoundedBorderForNetworkDisplayGrid}"
+                Background="{Binding CardsVisual[2].Background}"
+                AllowDrop="True" >
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
                         <i:InvokeCommandAction Command="{Binding DropOnCardCommand}" CommandParameter="2" />
@@ -335,6 +346,9 @@
                            Style="{StaticResource RoundedImageConnectNetworkDisplay}"
                            Visibility="{Binding CardsVisual[2].ConnectArrowVisibility}"
                            Grid.Column="1" />
+                        <Image Source="pack://application:,,,/Resource/Images/AlarmWarning.png"
+                               Style="{StaticResource RoundedImageAlarmWarningDisplay}"
+                               Visibility="{Binding CardsVisual[2].AlarmVisibility}"/>
 
 
                     </Grid>
@@ -396,7 +410,9 @@
             <Border 
                 Grid.Row="0"
                 Grid.Column="3"
-                Style="{StaticResource RoundedBorderForNetworkDisplayGrid}">
+                Style="{StaticResource RoundedBorderForNetworkDisplayGrid}"
+                Background="{Binding CardsVisual[3].Background}"
+                AllowDrop="True">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
                         <i:InvokeCommandAction Command="{Binding DropOnCardCommand}" CommandParameter="3" />
@@ -441,6 +457,9 @@
                            Style="{StaticResource RoundedImageConnectNetworkDisplay}"
                            Visibility="{Binding CardsVisual[3].ConnectArrowVisibility}"
                            Grid.Column="1" />
+                        <Image Source="pack://application:,,,/Resource/Images/AlarmWarning.png"
+                               Style="{StaticResource RoundedImageAlarmWarningDisplay}"
+                               Visibility="{Binding CardsVisual[3].AlarmVisibility}"/>
 
 
                     </Grid>
@@ -502,7 +521,9 @@
             <Border 
                 Grid.Row="1"
                 Grid.Column="0"
-                Style="{StaticResource RoundedBorderForNetworkDisplayGrid}">
+                Style="{StaticResource RoundedBorderForNetworkDisplayGrid}"
+                Background="{Binding CardsVisual[4].Background}"
+                AllowDrop="True">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
                         <i:InvokeCommandAction Command="{Binding DropOnCardCommand}" CommandParameter="4" />
@@ -547,6 +568,9 @@
                            Style="{StaticResource RoundedImageConnectNetworkDisplay}"
                            Visibility="{Binding CardsVisual[4].ConnectArrowVisibility}"
                            Grid.Column="1" />
+                        <Image Source="pack://application:,,,/Resource/Images/AlarmWarning.png"
+                               Style="{StaticResource RoundedImageAlarmWarningDisplay}"
+                               Visibility="{Binding CardsVisual[4].AlarmVisibility}"/>
 
 
                     </Grid>
@@ -608,7 +632,9 @@
             <Border 
                 Grid.Row="1"
                 Grid.Column="1"
-                Style="{StaticResource RoundedBorderForNetworkDisplayGrid}">
+                Style="{StaticResource RoundedBorderForNetworkDisplayGrid}"
+                Background="{Binding CardsVisual[5].Background}"
+                AllowDrop="True">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
                         <i:InvokeCommandAction Command="{Binding DropOnCardCommand}" CommandParameter="5" />
@@ -653,6 +679,9 @@
                            Style="{StaticResource RoundedImageConnectNetworkDisplay}"
                            Visibility="{Binding CardsVisual[5].ConnectArrowVisibility}"
                            Grid.Column="1" />
+                        <Image Source="pack://application:,,,/Resource/Images/AlarmWarning.png"
+                               Style="{StaticResource RoundedImageAlarmWarningDisplay}"
+                               Visibility="{Binding CardsVisual[5].AlarmVisibility}"/>
 
 
                     </Grid>
@@ -714,7 +743,9 @@
             <Border 
                 Grid.Row="1"
                 Grid.Column="2"
-                Style="{StaticResource RoundedBorderForNetworkDisplayGrid}">
+                Style="{StaticResource RoundedBorderForNetworkDisplayGrid}"
+                Background="{Binding CardsVisual[6].Background}"
+                AllowDrop="True">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
                         <i:InvokeCommandAction Command="{Binding DropOnCardCommand}" CommandParameter="6" />
@@ -759,6 +790,9 @@
                             Style="{StaticResource RoundedImageConnectNetworkDisplay}"
                             Visibility="{Binding CardsVisual[6].ConnectArrowVisibility}"
                             Grid.Column="1" />
+                        <Image Source="pack://application:,,,/Resource/Images/AlarmWarning.png"
+                               Style="{StaticResource RoundedImageAlarmWarningDisplay}"
+                               Visibility="{Binding CardsVisual[6].AlarmVisibility}"/>
 
 
                     </Grid>
@@ -820,7 +854,9 @@
             <Border 
                 Grid.Row="1"
                 Grid.Column="3"
-                Style="{StaticResource RoundedBorderForNetworkDisplayGrid}">
+                Style="{StaticResource RoundedBorderForNetworkDisplayGrid}"
+                Background="{Binding CardsVisual[7].Background}"
+                AllowDrop="True">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
                         <i:InvokeCommandAction Command="{Binding DropOnCardCommand}" CommandParameter="7" />
@@ -865,6 +901,9 @@
                            Style="{StaticResource RoundedImageConnectNetworkDisplay}"
                            Visibility="{Binding CardsVisual[7].ConnectArrowVisibility}"
                            Grid.Column="1" />
+                        <Image Source="pack://application:,,,/Resource/Images/AlarmWarning.png"
+                               Style="{StaticResource RoundedImageAlarmWarningDisplay}"
+                               Visibility="{Binding CardsVisual[7].AlarmVisibility}"/>
 
 
                     </Grid>
@@ -926,7 +965,9 @@
             <Border 
                 Grid.Row="2"
                 Grid.Column="0"
-                Style="{StaticResource RoundedBorderForNetworkDisplayGrid}">
+                Style="{StaticResource RoundedBorderForNetworkDisplayGrid}"
+                Background="{Binding CardsVisual[8].Background}"
+                AllowDrop="True">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
                         <i:InvokeCommandAction Command="{Binding DropOnCardCommand}" CommandParameter="8" />
@@ -971,6 +1012,9 @@
                            Style="{StaticResource RoundedImageConnectNetworkDisplay}"
                            Visibility="{Binding CardsVisual[8].ConnectArrowVisibility}"
                            Grid.Column="1" />
+                        <Image Source="pack://application:,,,/Resource/Images/AlarmWarning.png"
+                               Style="{StaticResource RoundedImageAlarmWarningDisplay}"
+                               Visibility="{Binding CardsVisual[8].AlarmVisibility}"/>
 
 
                     </Grid>
@@ -1032,7 +1076,9 @@
             <Border 
                 Grid.Row="2"
                 Grid.Column="1"
-                Style="{StaticResource RoundedBorderForNetworkDisplayGrid}">
+                Style="{StaticResource RoundedBorderForNetworkDisplayGrid}"
+                Background="{Binding CardsVisual[9].Background}"
+                AllowDrop="True">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
                         <i:InvokeCommandAction Command="{Binding DropOnCardCommand}" CommandParameter="9" />
@@ -1077,6 +1123,9 @@
                            Style="{StaticResource RoundedImageConnectNetworkDisplay}"
                            Visibility="{Binding CardsVisual[9].ConnectArrowVisibility}"
                            Grid.Column="1" />
+                        <Image Source="pack://application:,,,/Resource/Images/AlarmWarning.png"
+                               Style="{StaticResource RoundedImageAlarmWarningDisplay}"
+                               Visibility="{Binding CardsVisual[9].AlarmVisibility}"/>
 
 
                     </Grid>
@@ -1138,7 +1187,9 @@
             <Border 
                 Grid.Row="2"
                 Grid.Column="2"
-                Style="{StaticResource RoundedBorderForNetworkDisplayGrid}">
+                Style="{StaticResource RoundedBorderForNetworkDisplayGrid}"
+                Background="{Binding CardsVisual[10].Background}"
+                AllowDrop="True">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
                         <i:InvokeCommandAction Command="{Binding DropOnCardCommand}" CommandParameter="10" />
@@ -1183,6 +1234,9 @@
                            Style="{StaticResource RoundedImageConnectNetworkDisplay}"
                            Visibility="{Binding CardsVisual[10].ConnectArrowVisibility}"
                            Grid.Column="1" />
+                        <Image Source="pack://application:,,,/Resource/Images/AlarmWarning.png"
+                               Style="{StaticResource RoundedImageAlarmWarningDisplay}"
+                               Visibility="{Binding CardsVisual[10].AlarmVisibility}"/>
 
 
                     </Grid>
@@ -1244,7 +1298,9 @@
             <Border 
                 Grid.Row="2"
                 Grid.Column="3"
-                Style="{StaticResource RoundedBorderForNetworkDisplayGrid}">
+                Style="{StaticResource RoundedBorderForNetworkDisplayGrid}"
+                Background="{Binding CardsVisual[11].Background}"
+                AllowDrop="True">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="PreviewMouseLeftButtonUp">
                         <i:InvokeCommandAction Command="{Binding DropOnCardCommand}" CommandParameter="11" />
@@ -1289,6 +1345,9 @@
                            Style="{StaticResource RoundedImageConnectNetworkDisplay}"
                            Visibility="{Binding CardsVisual[11].ConnectArrowVisibility}"
                            Grid.Column="1" />
+                        <Image Source="pack://application:,,,/Resource/Images/AlarmWarning.png"
+                               Style="{StaticResource RoundedImageAlarmWarningDisplay}"
+                               Visibility="{Binding CardsVisual[11].AlarmVisibility}"/>
 
 
                     </Grid>

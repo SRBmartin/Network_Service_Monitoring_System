@@ -5,21 +5,27 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace NetworkService.Helpers.Styles
 {
     public class DisplayCardVisualRepresentation : BindableBase
     {
         private Visibility connectArrowVisibility;
-        private Visibility disconnectArrowVisibility;
+        private Visibility alarmVisibility;
         private string imgPath;
+        private Brush background;
 
+        private readonly Brush AlarmBackground = new SolidColorBrush(Color.FromRgb(250, 204, 197));
+        private readonly Brush NormalBackground = (Brush)Application.Current.FindResource("UIAccentColor");
         private readonly string ArrowPath = "pack://application:,,,/Resource/Images/ConnectArrow.png";
-        public DisplayCardVisualRepresentation(Visibility connectArrowVisibility = Visibility.Hidden, Visibility disconnectArrowVisibility = Visibility.Hidden, string imgPath = "pack://application:,,,/Resource/Images/ConnectArrow.png")
+        private readonly string CancelPath = "pack://application:,,,/Resource/Images/Cancel.png";
+        public DisplayCardVisualRepresentation(Visibility connectArrowVisibility = Visibility.Hidden, Visibility alarmVisibility = Visibility.Hidden, string imgPath = "pack://application:,,,/Resource/Images/ConnectArrow.png")
         {
             this.connectArrowVisibility = connectArrowVisibility;
-            this.disconnectArrowVisibility = disconnectArrowVisibility;
+            this.alarmVisibility = alarmVisibility;
             this.imgPath = imgPath;
+            background = NormalBackground;
         }
         public Visibility ConnectArrowVisibility
         {
@@ -30,13 +36,13 @@ namespace NetworkService.Helpers.Styles
                 OnPropertyChanged(nameof(ConnectArrowVisibility));
             }
         }
-        public Visibility DisconnectArrowVisibility
+        public Visibility AlarmVisibility
         {
-            get { return disconnectArrowVisibility; }
+            get { return alarmVisibility; }
             set
             {
-                disconnectArrowVisibility = value;
-                OnPropertyChanged(nameof(DisconnectArrowVisibility));
+                alarmVisibility = value;
+                OnPropertyChanged(nameof(AlarmVisibility));
             }
         }
         public string ImgPath
@@ -48,6 +54,15 @@ namespace NetworkService.Helpers.Styles
                 OnPropertyChanged(nameof(ImgPath));
             }
         }
+        public Brush Background
+        {
+            get { return background; }
+            set
+            {
+                background = value;
+                OnPropertyChanged(nameof(Background));
+            }
+        }
         public void StartConnecting()
         {
             ConnectArrowVisibility = Visibility.Visible;
@@ -55,7 +70,25 @@ namespace NetworkService.Helpers.Styles
         public void StopConnecting()
         {
             ConnectArrowVisibility = Visibility.Hidden;
-            DisconnectArrowVisibility = Visibility.Hidden;
+            ImgPath = ArrowPath;
+        }
+        public void ProposeCancel()
+        {
+            ImgPath = CancelPath;
+        }
+        public void StopCancelPropose()
+        {
+            ImgPath = ArrowPath;
+        }
+        public void RaiseAlarm()
+        {
+            AlarmVisibility = Visibility.Visible;
+            Background = AlarmBackground;
+        }
+        public void StopAlarm()
+        {
+            AlarmVisibility = Visibility.Hidden;
+            Background = NormalBackground;
         }
     }
 }

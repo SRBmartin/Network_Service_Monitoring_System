@@ -164,6 +164,10 @@ namespace NetworkService.Model
             Random random = new Random();
             return random.NextDouble() * (maximum - minimum) + minimum;
         }
+        public bool IsValueAlarming()
+        {
+            return value < MinValue || value > MaxValue;
+        }
         public override string ToString()
         {
             return $"Id: {IdS}\nName: {name}\nType: {type.Name}\nCurrent Value: {(float)Math.Round(value, 2)}.";

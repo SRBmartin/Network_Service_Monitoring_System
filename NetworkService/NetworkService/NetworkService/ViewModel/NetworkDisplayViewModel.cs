@@ -303,6 +303,7 @@ namespace NetworkService.ViewModel
                     CardsVisual.ToList().ForEach(cv => cv.StopConnecting());
                     selectedCardIndexFirst = -1;
                     selectedCardIndexSecond = -1;
+                    CheckAlarmingValues();
                     Messenger.Default.Send<NotificationContent>(NotificationHandler.CreateNotification(NotificationType.Success, "Drag & Drop", $"Entity \"{tmp.Name}\" was dropped on a card."));
                 }
                 else
@@ -379,6 +380,7 @@ namespace NetworkService.ViewModel
                     CardsVisual[index].StopConnecting();
                     cardsEntities[index].SetDefaultCardValue();
                     SerializationHandler.SerializeEntitiesToFile(CardsEntities, cardEntitiesSerializationPath);
+                    CheckAlarmingValues();
                     Messenger.Default.Send<NotificationContent>(NotificationHandler.CreateNotification(NotificationType.Success, "Remove from card", "Removing entity from the card was successful."));
                 }
                 else
@@ -574,7 +576,6 @@ namespace NetworkService.ViewModel
         {
             while (true)
             {
-                Thread.Sleep(5000);
                 for (int i = 0; i < CardsEntities.Count; ++i)
                 {
                     if (CardsEntities[i].Id != -1)
@@ -586,12 +587,23 @@ namespace NetworkService.ViewModel
                     }
                 }
                 CheckAlarmingValues();
+                Thread.Sleep(5000);
             }
         }
 
         private void CheckAlarmingValues()
         {
-
+            for(int i = 0; i < CardsEntities.Count; ++i)
+            {
+                if (CardsEntities[i].Id != -1 && CardsEntities[i].IsValueAlarming())
+                {
+                    CardsVisual[i].RaiseAlarm();
+                }
+                else
+                {
+                    cardsVisual[i].StopAlarm();
+                }
+            }
         }
 
     }
