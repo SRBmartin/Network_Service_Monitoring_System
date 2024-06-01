@@ -109,7 +109,8 @@
                             <ColumnDefinition Width="43.33" />
                             <ColumnDefinition Width="43.34" />
                         </Grid.ColumnDefinitions>
-                        <Image Source="pack://application:,,,/Resource/Images/DeleteDisplay.png"
+                        <Image x:Name="RemoveFromCard0"
+                            Source="pack://application:,,,/Resource/Images/DeleteDisplay.png"
                             Style="{StaticResource RoundedImageDeleteNetworkDisplay}"
                             Grid.Column="2" >
                             <i:Interaction.Triggers>
@@ -128,14 +129,56 @@
                     <Image Source="{Binding CardsEntities[0].Type.Img_Path}"
                            Style="{StaticResource CenteredRoundedImageNetworkDisplay}"
                            Grid.Row="1" />
-                    <Border Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="2">
+                    <Border x:Name="Card0IDTextBox" Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="2">
                         <TextBlock Text="{Binding CardsEntities[0].IdS}" Style="{StaticResource TextBlockNetworkDisplay}" />
                     </Border>
-                    <Border Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="3">
+                    <Border x:Name="Card0ValueTextBox" Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="3">
                         <TextBlock Text="{Binding CardsEntities[0].ValueS}" Style="{StaticResource TextBlockNetworkDisplay}" />
                     </Border>
                 </Grid>
             </Border>
+            <Popup
+                Width="120"
+                IsOpen="{Binding ElementName=Card0IDTextBox, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=Card0IDTextBox}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Entity ID:" />
+                    </Border>
+                </Grid>
+            </Popup>
+            <Popup
+                Width="120"
+                IsOpen="{Binding ElementName=Card0ValueTextBox, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=Card0ValueTextBox}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Entity value:" />
+                    </Border>
+                </Grid>
+            </Popup>
+            <Popup
+                Width="140"
+                IsOpen="{Binding ElementName=RemoveFromCard0, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=RemoveFromCard0}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Remove from card" />
+                    </Border>
+                </Grid>
+            </Popup>
             <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
             <!-- -=-=-=-=-DRUGI KVADRATIC-=-=-=-=-=- -->
             <Border 
@@ -172,7 +215,8 @@
                             <ColumnDefinition Width="43.33" />
                             <ColumnDefinition Width="43.34" />
                         </Grid.ColumnDefinitions>
-                        <Image Source="pack://application:,,,/Resource/Images/DeleteDisplay.png"
+                        <Image x:Name="RemoveFromCard1"
+                            Source="pack://application:,,,/Resource/Images/DeleteDisplay.png"
                             Style="{StaticResource RoundedImageDeleteNetworkDisplay}"
                             Grid.Column="2" >
                             <i:Interaction.Triggers>
@@ -191,14 +235,56 @@
                     <Image Source="{Binding CardsEntities[1].Type.Img_Path}"
                             Style="{StaticResource CenteredRoundedImageNetworkDisplay}"
                             Grid.Row="1" />
-                    <Border Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="2">
+                    <Border x:Name="Card1IDTextBox" Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="2">
                         <TextBlock Text="{Binding CardsEntities[1].IdS}" Style="{StaticResource TextBlockNetworkDisplay}" />
                     </Border>
-                    <Border Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="3">
+                    <Border x:Name="Card1ValueTextBox" Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="3">
                         <TextBlock Text="{Binding CardsEntities[1].ValueS}" Style="{StaticResource TextBlockNetworkDisplay}" />
                     </Border>
                 </Grid>
             </Border>
+            <Popup
+                Width="120"
+                IsOpen="{Binding ElementName=Card1IDTextBox, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=Card1IDTextBox}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Entity ID:" />
+                    </Border>
+                </Grid>
+            </Popup>
+            <Popup
+                Width="120"
+                IsOpen="{Binding ElementName=Card1ValueTextBox, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=Card1ValueTextBox}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Entity value:" />
+                    </Border>
+                </Grid>
+            </Popup>
+            <Popup
+                Width="140"
+                IsOpen="{Binding ElementName=RemoveFromCard1, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=RemoveFromCard1}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Remove from card" />
+                    </Border>
+                </Grid>
+            </Popup>
             <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
             <!-- -=-=-=-=-Treci KVADRATIC-=-=-=-=-=- -->
             <Border 
@@ -235,7 +321,8 @@
                             <ColumnDefinition Width="43.33" />
                             <ColumnDefinition Width="43.34" />
                         </Grid.ColumnDefinitions>
-                        <Image Source="pack://application:,,,/Resource/Images/DeleteDisplay.png"
+                        <Image x:Name="RemoveFromCard2"
+                            Source="pack://application:,,,/Resource/Images/DeleteDisplay.png"
                             Style="{StaticResource RoundedImageDeleteNetworkDisplay}"
                             Grid.Column="2" >
                             <i:Interaction.Triggers>
@@ -254,14 +341,56 @@
                     <Image Source="{Binding CardsEntities[2].Type.Img_Path}"
                             Style="{StaticResource CenteredRoundedImageNetworkDisplay}"
                             Grid.Row="1" />
-                    <Border Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="2">
+                    <Border x:Name="Card2IDTextBox" Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="2">
                         <TextBlock Text="{Binding CardsEntities[2].IdS}" Style="{StaticResource TextBlockNetworkDisplay}" />
                     </Border>
-                    <Border Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="3">
+                    <Border x:Name="Card2ValueTextBox" Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="3">
                         <TextBlock Text="{Binding CardsEntities[2].ValueS}" Style="{StaticResource TextBlockNetworkDisplay}" />
                     </Border>
                 </Grid>
             </Border>
+            <Popup
+                Width="120"
+                IsOpen="{Binding ElementName=Card2IDTextBox, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=Card2IDTextBox}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Entity ID:" />
+                    </Border>
+                </Grid>
+            </Popup>
+            <Popup
+                Width="120"
+                IsOpen="{Binding ElementName=Card2ValueTextBox, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=Card2ValueTextBox}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Entity value:" />
+                    </Border>
+                </Grid>
+            </Popup>
+            <Popup
+                Width="140"
+                IsOpen="{Binding ElementName=RemoveFromCard2, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=RemoveFromCard2}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Remove from card" />
+                    </Border>
+                </Grid>
+            </Popup>
             <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
             <!-- -=-=-=-=-Cetvrti KVADRATIC-=-=-=-=-=- -->
             <Border 
@@ -298,7 +427,8 @@
                             <ColumnDefinition Width="43.33" />
                             <ColumnDefinition Width="43.34" />
                         </Grid.ColumnDefinitions>
-                        <Image Source="pack://application:,,,/Resource/Images/DeleteDisplay.png"
+                        <Image x:Name="RemoveFromCard3"
+                            Source="pack://application:,,,/Resource/Images/DeleteDisplay.png"
                             Style="{StaticResource RoundedImageDeleteNetworkDisplay}"
                             Grid.Column="2" >
                             <i:Interaction.Triggers>
@@ -317,14 +447,56 @@
                     <Image Source="{Binding CardsEntities[3].Type.Img_Path}"
                             Style="{StaticResource CenteredRoundedImageNetworkDisplay}"
                             Grid.Row="1" />
-                    <Border Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="2">
+                    <Border x:Name="Card3IDTextBox" Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="2">
                         <TextBlock Text="{Binding CardsEntities[3].IdS}" Style="{StaticResource TextBlockNetworkDisplay}" />
                     </Border>
-                    <Border Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="3">
+                    <Border x:Name="Card3ValueTextBox" Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="3">
                         <TextBlock Text="{Binding CardsEntities[3].ValueS}" Style="{StaticResource TextBlockNetworkDisplay}" />
                     </Border>
                 </Grid>
             </Border>
+            <Popup
+                Width="120"
+                IsOpen="{Binding ElementName=Card3IDTextBox, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=Card3IDTextBox}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Entity ID:" />
+                    </Border>
+                </Grid>
+            </Popup>
+            <Popup
+                Width="120"
+                IsOpen="{Binding ElementName=Card3ValueTextBox, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=Card3ValueTextBox}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Entity value:" />
+                    </Border>
+                </Grid>
+            </Popup>
+            <Popup
+                Width="140"
+                IsOpen="{Binding ElementName=RemoveFromCard3, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=RemoveFromCard3}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Remove from card" />
+                    </Border>
+                </Grid>
+            </Popup>
             <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
             <!-- -=-=-=-=-PETI KVADRATIC-=-=-=-=-=- -->
             <Border 
@@ -361,7 +533,8 @@
                             <ColumnDefinition Width="43.33" />
                             <ColumnDefinition Width="43.34" />
                         </Grid.ColumnDefinitions>
-                        <Image Source="pack://application:,,,/Resource/Images/DeleteDisplay.png"
+                        <Image x:Name="RemoveFromCard4"
+                            Source="pack://application:,,,/Resource/Images/DeleteDisplay.png"
                             Style="{StaticResource RoundedImageDeleteNetworkDisplay}"
                             Grid.Column="2" >
                             <i:Interaction.Triggers>
@@ -380,14 +553,56 @@
                     <Image Source="{Binding CardsEntities[4].Type.Img_Path}"
                             Style="{StaticResource CenteredRoundedImageNetworkDisplay}"
                             Grid.Row="1" />
-                    <Border Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="2">
+                    <Border x:Name="Card4IDTextBox" Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="2">
                         <TextBlock Text="{Binding CardsEntities[4].IdS}" Style="{StaticResource TextBlockNetworkDisplay}" />
                     </Border>
-                    <Border Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="3">
+                    <Border x:Name="Card4ValueTextBox" Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="3">
                         <TextBlock Text="{Binding CardsEntities[4].ValueS}" Style="{StaticResource TextBlockNetworkDisplay}" />
                     </Border>
                 </Grid>
             </Border>
+            <Popup
+                Width="120"
+                IsOpen="{Binding ElementName=Card4IDTextBox, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=Card4IDTextBox}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Entity ID:" />
+                    </Border>
+                </Grid>
+            </Popup>
+            <Popup
+                Width="120"
+                IsOpen="{Binding ElementName=Card4ValueTextBox, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=Card4ValueTextBox}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Entity value:" />
+                    </Border>
+                </Grid>
+            </Popup>
+            <Popup
+                Width="140"
+                IsOpen="{Binding ElementName=RemoveFromCard4, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=RemoveFromCard4}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Remove from card" />
+                    </Border>
+                </Grid>
+            </Popup>
             <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
             <!-- -=-=-=-=-SESTI KVADRATIC-=-=-=-=-=- -->
             <Border 
@@ -424,7 +639,8 @@
                             <ColumnDefinition Width="43.33" />
                             <ColumnDefinition Width="43.34" />
                         </Grid.ColumnDefinitions>
-                        <Image Source="pack://application:,,,/Resource/Images/DeleteDisplay.png"
+                        <Image x:Name="RemoveFromCard5"
+                            Source="pack://application:,,,/Resource/Images/DeleteDisplay.png"
                             Style="{StaticResource RoundedImageDeleteNetworkDisplay}"
                             Grid.Column="2" >
                             <i:Interaction.Triggers>
@@ -443,14 +659,56 @@
                     <Image Source="{Binding CardsEntities[5].Type.Img_Path}"
                             Style="{StaticResource CenteredRoundedImageNetworkDisplay}"
                             Grid.Row="1" />
-                    <Border Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="2">
+                    <Border x:Name="Card5IDTextBox" Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="2">
                         <TextBlock Text="{Binding CardsEntities[5].IdS}" Style="{StaticResource TextBlockNetworkDisplay}" />
                     </Border>
-                    <Border Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="3">
+                    <Border x:Name="Card5ValueTextBox" Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="3">
                         <TextBlock Text="{Binding CardsEntities[5].ValueS}" Style="{StaticResource TextBlockNetworkDisplay}" />
                     </Border>
                 </Grid>
             </Border>
+            <Popup
+                Width="120"
+                IsOpen="{Binding ElementName=Card5IDTextBox, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=Card5IDTextBox}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Entity ID:" />
+                    </Border>
+                </Grid>
+            </Popup>
+            <Popup
+                Width="120"
+                IsOpen="{Binding ElementName=Card5ValueTextBox, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=Card5ValueTextBox}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Entity value:" />
+                    </Border>
+                </Grid>
+            </Popup>
+            <Popup
+                Width="140"
+                IsOpen="{Binding ElementName=RemoveFromCard5, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=RemoveFromCard5}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Remove from card" />
+                    </Border>
+                </Grid>
+            </Popup>
             <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
             <!-- -=-=-=-=-SEDMI KVADRATIC-=-=-=-=-=- -->
             <Border 
@@ -487,7 +745,8 @@
                             <ColumnDefinition Width="43.33" />
                             <ColumnDefinition Width="43.34" />
                         </Grid.ColumnDefinitions>
-                        <Image Source="pack://application:,,,/Resource/Images/DeleteDisplay.png"
+                        <Image x:Name="RemoveFromCard6"
+                            Source="pack://application:,,,/Resource/Images/DeleteDisplay.png"
                             Style="{StaticResource RoundedImageDeleteNetworkDisplay}"
                             Grid.Column="2" >
                             <i:Interaction.Triggers>
@@ -506,14 +765,56 @@
                     <Image Source="{Binding CardsEntities[6].Type.Img_Path}"
                             Style="{StaticResource CenteredRoundedImageNetworkDisplay}"
                             Grid.Row="1" />
-                    <Border Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="2">
+                    <Border x:Name="Card6IDTextBox" Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="2">
                         <TextBlock Text="{Binding CardsEntities[6].IdS}" Style="{StaticResource TextBlockNetworkDisplay}" />
                     </Border>
-                    <Border Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="3">
+                    <Border x:Name="Card6ValueTextBox" Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="3">
                         <TextBlock Text="{Binding CardsEntities[6].ValueS}" Style="{StaticResource TextBlockNetworkDisplay}" />
                     </Border>
                 </Grid>
             </Border>
+            <Popup
+                Width="120"
+                IsOpen="{Binding ElementName=Card6IDTextBox, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=Card6IDTextBox}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Entity ID:" />    
+                    </Border>
+                </Grid>
+            </Popup>
+            <Popup
+                Width="120"
+                IsOpen="{Binding ElementName=Card6ValueTextBox, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=Card6ValueTextBox}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Entity value:" />
+                    </Border>
+                </Grid>
+            </Popup>
+            <Popup
+                Width="140"
+                IsOpen="{Binding ElementName=RemoveFromCard6, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=RemoveFromCard6}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Remove from card" />
+                    </Border>
+                </Grid>
+            </Popup>
             <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
             <!-- -=-=-=-=-OSMI KVADRATIC-=-=-=-=-=- -->
             <Border 
@@ -550,7 +851,8 @@
                             <ColumnDefinition Width="43.33" />
                             <ColumnDefinition Width="43.34" />
                         </Grid.ColumnDefinitions>
-                        <Image Source="pack://application:,,,/Resource/Images/DeleteDisplay.png"
+                        <Image x:Name="RemoveFromCard7"
+                            Source="pack://application:,,,/Resource/Images/DeleteDisplay.png"
                             Style="{StaticResource RoundedImageDeleteNetworkDisplay}"
                             Grid.Column="2" >
                             <i:Interaction.Triggers>
@@ -569,14 +871,56 @@
                     <Image Source="{Binding CardsEntities[7].Type.Img_Path}"
                             Style="{StaticResource CenteredRoundedImageNetworkDisplay}"
                             Grid.Row="1" />
-                    <Border Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="2">
+                    <Border x:Name="Card7IDTextBox" Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="2">
                         <TextBlock Text="{Binding CardsEntities[7].IdS}" Style="{StaticResource TextBlockNetworkDisplay}" />
                     </Border>
-                    <Border Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="3">
+                    <Border x:Name="Card7ValueTextBox" Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="3">
                         <TextBlock Text="{Binding CardsEntities[7].ValueS}" Style="{StaticResource TextBlockNetworkDisplay}" />
                     </Border>
                 </Grid>
             </Border>
+            <Popup
+                Width="120"
+                IsOpen="{Binding ElementName=Card7IDTextBox, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=Card7IDTextBox}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Entity ID:" />
+                    </Border>
+                </Grid>
+            </Popup>
+            <Popup
+                Width="120"
+                IsOpen="{Binding ElementName=Card7ValueTextBox, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=Card7ValueTextBox}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Entity value:" />
+                    </Border>
+                </Grid>
+            </Popup>
+            <Popup
+                Width="140"
+                IsOpen="{Binding ElementName=RemoveFromCard7, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=RemoveFromCard7}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Remove from card" />
+                    </Border>
+                </Grid>
+            </Popup>
             <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
             <!-- -=-=-=-=-DEVETI KVADRATIC-=-=-=-=-=- -->
             <Border 
@@ -613,7 +957,8 @@
                             <ColumnDefinition Width="43.33" />
                             <ColumnDefinition Width="43.34" />
                         </Grid.ColumnDefinitions>
-                        <Image Source="pack://application:,,,/Resource/Images/DeleteDisplay.png"
+                        <Image x:Name="RemoveFromCard8"
+                            Source="pack://application:,,,/Resource/Images/DeleteDisplay.png"
                             Style="{StaticResource RoundedImageDeleteNetworkDisplay}"
                             Grid.Column="2" >
                             <i:Interaction.Triggers>
@@ -632,14 +977,56 @@
                     <Image Source="{Binding CardsEntities[8].Type.Img_Path}"
                             Style="{StaticResource CenteredRoundedImageNetworkDisplay}"
                             Grid.Row="1" />
-                    <Border Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="2">
+                    <Border x:Name="Card8IDTextBox" Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="2">
                         <TextBlock Text="{Binding CardsEntities[8].IdS}" Style="{StaticResource TextBlockNetworkDisplay}" />
                     </Border>
-                    <Border Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="3">
+                    <Border x:Name="Card8ValueTextBox" Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="3">
                         <TextBlock Text="{Binding CardsEntities[8].ValueS}" Style="{StaticResource TextBlockNetworkDisplay}" />
                     </Border>
                 </Grid>
             </Border>
+            <Popup
+                Width="120"
+                IsOpen="{Binding ElementName=Card8IDTextBox, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=Card8IDTextBox}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Entity ID:" />
+                    </Border>
+                </Grid>
+            </Popup>
+            <Popup
+                Width="120"
+                IsOpen="{Binding ElementName=Card8ValueTextBox, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=Card8ValueTextBox}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Entity value:" />
+                    </Border>
+                </Grid>
+            </Popup>
+            <Popup
+                Width="140"
+                IsOpen="{Binding ElementName=RemoveFromCard8, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=RemoveFromCard8}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Remove from card" />
+                    </Border>
+                </Grid>
+            </Popup>
             <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
             <!-- -=-=-=-=-DESETI KVADRATIC-=-=-=-=-=- -->
             <Border 
@@ -676,7 +1063,8 @@
                             <ColumnDefinition Width="43.33" />
                             <ColumnDefinition Width="43.34" />
                         </Grid.ColumnDefinitions>
-                        <Image Source="pack://application:,,,/Resource/Images/DeleteDisplay.png"
+                        <Image x:Name="RemoveFromCard9"
+                            Source="pack://application:,,,/Resource/Images/DeleteDisplay.png"
                             Style="{StaticResource RoundedImageDeleteNetworkDisplay}"
                             Grid.Column="2" >
                             <i:Interaction.Triggers>
@@ -695,14 +1083,56 @@
                     <Image Source="{Binding CardsEntities[9].Type.Img_Path}"
                             Style="{StaticResource CenteredRoundedImageNetworkDisplay}"
                             Grid.Row="1" />
-                    <Border Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="2">
+                    <Border x:Name="Card9IDTextBox" Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="2">
                         <TextBlock Text="{Binding CardsEntities[9].IdS}" Style="{StaticResource TextBlockNetworkDisplay}" />
                     </Border>
-                    <Border Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="3">
+                    <Border x:Name="Card9ValueTextBox" Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="3">
                         <TextBlock Text="{Binding CardsEntities[9].ValueS}" Style="{StaticResource TextBlockNetworkDisplay}" />
                     </Border>
                 </Grid>
             </Border>
+            <Popup
+                Width="120"
+                IsOpen="{Binding ElementName=Card9IDTextBox, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=Card9IDTextBox}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Entity ID:" />
+                    </Border>
+                </Grid>
+            </Popup>
+            <Popup
+                Width="120"
+                IsOpen="{Binding ElementName=Card9ValueTextBox, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=Card9ValueTextBox}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Entity value:" />
+                    </Border>
+                </Grid>
+            </Popup>
+            <Popup
+                Width="140"
+                IsOpen="{Binding ElementName=RemoveFromCard9, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=RemoveFromCard9}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Remove from card" />
+                    </Border>
+                </Grid>
+            </Popup>
             <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
             <!-- -=-=-=-=-JEDANAESTI KVADRATIC-=-=-=-=-=- -->
             <Border 
@@ -739,7 +1169,8 @@
                             <ColumnDefinition Width="43.33" />
                             <ColumnDefinition Width="43.34" />
                         </Grid.ColumnDefinitions>
-                        <Image Source="pack://application:,,,/Resource/Images/DeleteDisplay.png"
+                        <Image x:Name="RemoveFromCard10"
+                            Source="pack://application:,,,/Resource/Images/DeleteDisplay.png"
                             Style="{StaticResource RoundedImageDeleteNetworkDisplay}"
                             Grid.Column="2" >
                             <i:Interaction.Triggers>
@@ -758,14 +1189,56 @@
                     <Image Source="{Binding CardsEntities[10].Type.Img_Path}"
                             Style="{StaticResource CenteredRoundedImageNetworkDisplay}"
                             Grid.Row="1" />
-                    <Border Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="2">
+                    <Border x:Name="Card10IDTextBox" Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="2">
                         <TextBlock Text="{Binding CardsEntities[10].IdS}" Style="{StaticResource TextBlockNetworkDisplay}" />
                     </Border>
-                    <Border Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="3">
+                    <Border x:Name="Card10ValueTextBox" Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="3">
                         <TextBlock Text="{Binding CardsEntities[10].ValueS}" Style="{StaticResource TextBlockNetworkDisplay}" />
                     </Border>
                 </Grid>
             </Border>
+            <Popup
+                Width="120"
+                IsOpen="{Binding ElementName=Card10IDTextBox, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=Card10IDTextBox}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Entity ID:" />
+                    </Border>
+                </Grid>
+            </Popup>
+            <Popup
+                Width="120"
+                IsOpen="{Binding ElementName=Card10ValueTextBox, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=Card10ValueTextBox}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Entity value:" />
+                    </Border>
+                </Grid>
+            </Popup>
+            <Popup
+                Width="140"
+                IsOpen="{Binding ElementName=RemoveFromCard10, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=RemoveFromCard10}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Remove from card" />
+                    </Border>
+                </Grid>
+            </Popup>
             <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
             <!-- -=-=-=-=-DVANAESTI KVADRATIC-=-=-=-=-=- -->
             <Border 
@@ -802,7 +1275,8 @@
                             <ColumnDefinition Width="43.33" />
                             <ColumnDefinition Width="43.34" />
                         </Grid.ColumnDefinitions>
-                        <Image Source="pack://application:,,,/Resource/Images/DeleteDisplay.png"
+                        <Image x:Name="RemoveFromCard11"
+                            Source="pack://application:,,,/Resource/Images/DeleteDisplay.png"
                             Style="{StaticResource RoundedImageDeleteNetworkDisplay}"
                             Grid.Column="2" >
                             <i:Interaction.Triggers>
@@ -821,14 +1295,56 @@
                     <Image Source="{Binding CardsEntities[11].Type.Img_Path}"
                             Style="{StaticResource CenteredRoundedImageNetworkDisplay}"
                             Grid.Row="1" />
-                    <Border Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="2">
+                    <Border x:Name="Card11IDTextBox" Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="2">
                         <TextBlock Text="{Binding CardsEntities[11].IdS}" Style="{StaticResource TextBlockNetworkDisplay}" />
                     </Border>
-                    <Border Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="3">
+                    <Border x:Name="Card11ValueTextBox" Style="{StaticResource RoundedTextBlockBorderNetworkDisplay}" Grid.Row="3">
                         <TextBlock Text="{Binding CardsEntities[11].ValueS}" Style="{StaticResource TextBlockNetworkDisplay}" />
                     </Border>
                 </Grid>
             </Border>
+            <Popup
+                Width="120"
+                IsOpen="{Binding ElementName=Card11IDTextBox, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=Card11IDTextBox}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Entity ID:" />        
+                    </Border>
+                </Grid>
+            </Popup>
+            <Popup
+                Width="120"
+                IsOpen="{Binding ElementName=Card11ValueTextBox, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=Card11ValueTextBox}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Entity value:" /> 
+                    </Border>
+                </Grid>
+            </Popup>
+            <Popup
+                Width="140"
+                IsOpen="{Binding ElementName=RemoveFromCard11, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=RemoveFromCard11}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Remove from card" />
+                    </Border>
+                </Grid>
+            </Popup>
             <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
         </Grid>
         <ItemsControl ItemsSource="{Binding LinesHolder}">
