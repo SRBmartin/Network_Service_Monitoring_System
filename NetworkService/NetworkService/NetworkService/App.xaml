@@ -9,7 +9,7 @@
         <SolidColorBrush x:Key="UITertiaryColor" Color="#FAEBCD" />
         <SolidColorBrush x:Key="UIAccentColor" Color="#F8F8F8" />
         <SolidColorBrush x:Key="UITerminalColor" Color="#181014" />
-
+        <SolidColorBrush x:Key="UIGraphLines" Color="#bfbdbd" />
 
         <FontFamily x:Key="HeaderFont">
             /Resource/Fonts/HeadingFont.ttf#Beautiful Police Officer
@@ -660,6 +660,18 @@
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="TextAlignment" Value="Center" />
             <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+
+        <Style TargetType="Border" x:Key="GraphBorderDrawingStyle">
+            <Setter Property="BorderBrush" Value="{StaticResource UIGraphLines}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Background" Value="{StaticResource UIAccentColor}" />
+        </Style>
+
+        <Style TargetType="Border" x:Key="RoundedTextBlockBorderGraphView">
+            <Setter Property="CornerRadius" Value="15" />
+            <Setter Property="Background" Value="{StaticResource UISecondaryColor}" />
+            <Setter Property="Margin" Value="4" />
         </Style>
 
     </Application.Resources>
