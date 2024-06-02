@@ -35,6 +35,9 @@
         <DataTemplate DataType="{x:Type viewModel:NetworkDisplayViewModel}">
             <views:NetworkDisplayView />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:MeasurementGraphViewModel}">
+            <views:MeasurementGraphView />
+        </DataTemplate>
         <styleConverters:UndoStyleConverter x:Key="UndoStyleConverter" />
     </Window.Resources>
     
@@ -135,7 +138,7 @@
                         <Button
                             x:Name="MeasurementGraphViewButton"
                             Grid.Column="3"
-                            Command=""
+                            Command="{Binding NavigationCommand}"
                             CommandParameter="MeasurementGraphView"
                             Cursor="Hand"
                             Style="{StaticResource DockButtonStyle}">

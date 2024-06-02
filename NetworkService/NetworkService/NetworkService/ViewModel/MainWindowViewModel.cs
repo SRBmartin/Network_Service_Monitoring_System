@@ -5,15 +5,18 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 using MVVMLight.Messaging;
 using NetworkService.Helpers;
 using NetworkService.Helpers.Common;
-using NetworkService.Helpers.Undo;
 using NetworkService.Model;
 using Notification.Wpf;
+using Newtonsoft.Json;
 
 namespace NetworkService.ViewModel
 {
@@ -25,6 +28,7 @@ namespace NetworkService.ViewModel
         private TerminalViewModel terminalViewModel;
         private NetworkEntityViewModel networkEntityViewModel;
         private NetworkDisplayViewModel networkDisplayViewModel;
+        private MeasurementGraphViewModel measurementGraphViewModel;
         public MyICommand<Window> ExitAppCommand { get; private set; }
         public MyICommand<string> NavigationCommand { get; private set; }
         private MyICommand undoActionCommand;
@@ -46,6 +50,7 @@ namespace NetworkService.ViewModel
 
             networkEntityViewModel = new NetworkEntityViewModel();
             networkDisplayViewModel = new NetworkDisplayViewModel();
+            measurementGraphViewModel = new MeasurementGraphViewModel();
             terminalViewModel = new TerminalViewModel();
             startingViewModel = new StartingViewModel();
             notificationManager = new NotificationManager();
@@ -114,6 +119,17 @@ namespace NetworkService.ViewModel
             }
         }
 
+        public MeasurementGraphViewModel MeasurementGraphViewModel
+        {
+            get
+            {
+                return measurementGraphViewModel;
+            }
+            set
+            {
+                SetProperty(ref measurementGraphViewModel, value);
+            }
+        }
         public UndoActionHolder UndoAction
         {
             get
@@ -198,9 +214,8 @@ namespace NetworkService.ViewModel
                         CurrentViewModel = networkDisplayViewModel;
                         Messenger.Default.Send<bool>(true);
                         break;
-
                     case "MeasurementGraphView":
-
+                        CurrentViewModel = measurementGraphViewModel;
                         break;
                 }
             }
@@ -251,7 +266,38 @@ namespace NetworkService.ViewModel
                 UndoAction = new UndoActionHolder();
             }
         }
-        private void ExitApp(Window toClose)
+        public static void SaveCards(ObservableCollection<PowerConsumption> entities)
+        {
+            var option = new JsonSerializerOptions
+            {
+                WriteIndented = true,
+                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+                ReferenceHandler = ReferenceHandler.Preserve
+            };
+            //string jsonString = JsonSerializer.Serialize(entities, option);
+            string jsonString = JsonConvert.SerializeObject(entities);
+            System.IO.File.WriteAllText("../../Resource/json/cardEntities.json", jsonString);
+            //string jsonString = await Task.Run(() => Newtonsoft.Json.JsonConvert.SerializeObject(entities));
+            //System.IO.File.WriteAllText("../../Resource/json/cardEntities.json", jsonString);
+            //Task.Run(() =>
+            //{
+            //    string jsonString = string.Empty;
+            //    Application.Current.Dispatcher.Invoke(() =>
+            //    {
+            //        //jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(entities, Newtonsoft.Json.Formatting.Indented);
+            //        var option = new JsonSerializerOptions
+            //        {
+            //            WriteIndented = true,
+            //            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+            //            ReferenceHandler = ReferenceHandler.Preserve
+            //        };
+            //        jsonString = JsonSerializer.Serialize(entities, option);
+            //    });
+            //    System.IO.File.WriteAllText("../../Resource/json/cardEntities.json", jsonString);
+            //});
+        }
+
+            private void ExitApp(Window toClose)
         {
             toClose.Close();
         }
