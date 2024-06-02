@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.IO;
+using System.Windows;
 
 namespace NetworkService.Helpers.Common
 {
@@ -15,14 +16,8 @@ namespace NetworkService.Helpers.Common
     {
         public static void SerializeEntitiesToFile(ObservableCollection<PowerConsumption> entities, string filePath = "../../Resource/json/entities.json")
         {
-            var option = new JsonSerializerOptions
-            {
-                WriteIndented = true,
-                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-                ReferenceHandler = ReferenceHandler.IgnoreCycles
-            };
-            string jsonString = JsonSerializer.Serialize(entities, option);
-            File.WriteAllText(filePath, jsonString);
+                string jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(entities, Newtonsoft.Json.Formatting.Indented);
+                File.WriteAllText(filePath, jsonString);
         }
         public static ObservableCollection<PowerConsumption> DeserializeEntitiesFromFile(string filePath = "../../Resource/json/entities.json")
         {
