@@ -1,40 +1,57 @@
 [
   {
+    "MeasurementHistory": [
+      {
+        "Time": "00:00",
+        "PositionIndex": 5,
+        "Value": 0.84807968139648438,
+        "Diametar": 8.5487180616034824,
+        "CanvasRight": 413.72564096919825,
+        "CanvasBottom": 195.72564096919825,
+        "Background": "#FF8AAFFF"
+      },
+      {
+        "Time": "00:02",
+        "PositionIndex": 4,
+        "Value": 0.85,
+        "Diametar": 8.56830601092896,
+        "CanvasRight": 329.71584699453553,
+        "CanvasBottom": 195.71584699453553,
+        "Background": "#FF8AAFFF"
+      },
+      {
+        "Time": "00:15",
+        "PositionIndex": 3,
+        "Value": 0.85,
+        "Diametar": 8.56830601092896,
+        "CanvasRight": 245.71584699453553,
+        "CanvasBottom": 195.71584699453553,
+        "Background": "#FF8AAFFF"
+      },
+      {
+        "Time": "00:30",
+        "PositionIndex": 2,
+        "Value": 0.85,
+        "Diametar": 8.56830601092896,
+        "CanvasRight": 161.71584699453553,
+        "CanvasBottom": 195.71584699453553,
+        "Background": "#FF8AAFFF"
+      },
+      {
+        "Time": "00:35",
+        "PositionIndex": 1,
+        "Value": 1.7249364852905273,
+        "Diametar": 17.492976899138348,
+        "CanvasRight": 73.253511550430829,
+        "CanvasBottom": 191.25351155043083,
+        "Background": "#FF8AAFFF"
+      }
+    ],
     "Id": 1,
     "IdS": "1",
-    "Name": "SmartTransformator",
-    "Value": 1.0900000000000001,
-    "ValueS": "1.09",
-    "Type": {
-      "Name": "Smart Meter",
-      "Img_Path": "pack://application:,,,/Resource/Images/SmartMeter.png"
-    },
-    "ValidationErrors": {
-      "IsValid": true
-    },
-    "IsValid": false
-  },
-  {
-    "Id": 2,
-    "IdS": "2",
-    "Name": "SmartCityPoweredMeter",
-    "Value": 3.1499999999999999,
-    "ValueS": "3.15",
-    "Type": {
-      "Name": "Smart Meter",
-      "Img_Path": "pack://application:,,,/Resource/Images/SmartMeter.png"
-    },
-    "ValidationErrors": {
-      "IsValid": true
-    },
-    "IsValid": false
-  },
-  {
-    "Id": 3,
-    "IdS": "3",
-    "Name": "Metricni Uredjaj",
-    "Value": 4.3200000000000003,
-    "ValueS": "4.32",
+    "Name": "Podbara - Interval Transformator",
+    "Value": 1.72,
+    "ValueS": "1.72",
     "Type": {
       "Name": "Interval Meter",
       "Img_Path": "pack://application:,,,/Resource/Images/IntervalMeter.png"
@@ -45,14 +62,123 @@
     "IsValid": false
   },
   {
-    "Id": 198,
-    "IdS": "198",
-    "Name": "Jespar Proffessional",
-    "Value": 4.0099999999999998,
-    "ValueS": "4.00655956547082",
+    "MeasurementHistory": [
+      {
+        "Time": "00:30",
+        "PositionIndex": 5,
+        "Value": 1.33,
+        "Diametar": 13.464480874316939,
+        "CanvasRight": 411.26775956284155,
+        "CanvasBottom": 193.26775956284152,
+        "Background": "#FF8AAFFF"
+      },
+      {
+        "Time": "00:35",
+        "PositionIndex": 4,
+        "Value": 4.7871241569519043,
+        "Diametar": 48.728406701148749,
+        "CanvasRight": 309.63579664942563,
+        "CanvasBottom": 175.63579664942563,
+        "Background": "#FFFACCC5"
+      },
+      {
+        "Time": "00:35",
+        "PositionIndex": 3,
+        "Value": 5.4765877723693848,
+        "Diametar": 55.761186749123048,
+        "CanvasRight": 222.11940662543847,
+        "CanvasBottom": 172.11940662543847,
+        "Background": "#FFFACCC5"
+      },
+      {
+        "Time": "00:35",
+        "PositionIndex": 2,
+        "Value": 0.18457768857479096,
+        "Diametar": 1.7807560218922207,
+        "CanvasRight": 165.10962198905389,
+        "CanvasBottom": 199.10962198905389,
+        "Background": "#FFFACCC5"
+      },
+      {
+        "Time": "00:35",
+        "PositionIndex": 1,
+        "Value": 4.8318486213684082,
+        "Diametar": 49.184612531262452,
+        "CanvasRight": 57.407693734368777,
+        "CanvasBottom": 175.40769373436876,
+        "Background": "#FFFACCC5"
+      }
+    ],
+    "Id": 2,
+    "IdS": "2",
+    "Name": "Master Centar Sajam",
+    "Value": 4.83,
+    "ValueS": "4.83",
     "Type": {
-      "Name": "Smart Meter",
-      "Img_Path": "pack://application:,,,/Resource/Images/SmartMeter.png"
+      "Name": "Interval Meter",
+      "Img_Path": "pack://application:,,,/Resource/Images/IntervalMeter.png"
+    },
+    "ValidationErrors": {
+      "IsValid": true
+    },
+    "IsValid": false
+  },
+  {
+    "MeasurementHistory": [
+      {
+        "Time": "00:30",
+        "PositionIndex": 5,
+        "Value": 3.21,
+        "Diametar": 32.641165755919857,
+        "CanvasRight": 401.67941712204009,
+        "CanvasBottom": 183.67941712204006,
+        "Background": "#FFFACCC5"
+      },
+      {
+        "Time": "00:35",
+        "PositionIndex": 4,
+        "Value": 0.0,
+        "Diametar": -0.10200364298724954,
+        "CanvasRight": 334.05100182149363,
+        "CanvasBottom": 200.05100182149363,
+        "Background": "#FFFACCC5"
+      },
+      {
+        "Time": "00:35",
+        "PositionIndex": 3,
+        "Value": 3.9555191993713379,
+        "Diametar": 40.24573318120126,
+        "CanvasRight": 229.87713340939936,
+        "CanvasBottom": 179.87713340939936,
+        "Background": "#FFFACCC5"
+      },
+      {
+        "Time": "00:35",
+        "PositionIndex": 2,
+        "Value": 4.1723699569702148,
+        "Diametar": 42.457689907164308,
+        "CanvasRight": 144.77115504641785,
+        "CanvasBottom": 178.77115504641785,
+        "Background": "#FFFACCC5"
+      },
+      {
+        "Time": "00:36",
+        "PositionIndex": 1,
+        "Value": 2.9590945243835449,
+        "Diametar": 30.081838500087159,
+        "CanvasRight": 66.959080749956428,
+        "CanvasBottom": 184.95908074995643,
+        "Background": "#FFFACCC5"
+      }
+    ],
+    "Id": 3,
+    "IdS": "3",
+    "Name": "Liman 1",
+    "Value": 2.96,
+    "ValueS": "2.96",
+    "Type": {
+      "Name": "Interval Meter",
+      "Img_Path": "pack://application:,,,/Resource/Images/IntervalMeter.png"
     },
     "ValidationErrors": {
       "IsValid": true
