@@ -1,9 +1,11 @@
 ﻿using NetworkService.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace NetworkService.Model
@@ -15,7 +17,9 @@ namespace NetworkService.Model
         private string name;
         private double value;
         private string valueS;
-        MeterType type;
+        private MeterType type;
+        private ObservableCollection<MeasurementHistory> measurementHistory = new ObservableCollection<MeasurementHistory>();
+        private bool skip = true;
         public static readonly double MinValue = 0.34;
         public static readonly double MaxValue = 2.73;
         public PowerConsumption() { }
@@ -26,6 +30,11 @@ namespace NetworkService.Model
             this.type = type;
             value = Math.Round(GetRandomNumberValue(0.01, 5.50), 2);
             ValueS = value.ToString();
+            MeasurementHistory.Add(new MeasurementHistory());
+            MeasurementHistory.Add(new MeasurementHistory());
+            MeasurementHistory.Add(new MeasurementHistory());
+            MeasurementHistory.Add(new MeasurementHistory());
+            MeasurementHistory.Add(new MeasurementHistory());
         }
         public PowerConsumption(string idS, string name, MeterType type, double value)
         {
@@ -34,6 +43,28 @@ namespace NetworkService.Model
             this.value = Math.Round(value, 2);
             ValueS = this.value.ToString();
             this.type = type;
+            MeasurementHistory.Add(new MeasurementHistory());
+            MeasurementHistory.Add(new MeasurementHistory());
+            MeasurementHistory.Add(new MeasurementHistory());
+            MeasurementHistory.Add(new MeasurementHistory());
+            MeasurementHistory.Add(new MeasurementHistory());
+        }
+        public PowerConsumption(string idS, string name, MeterType type, double value, ObservableCollection<MeasurementHistory> measurementHistory)
+        {
+            this.idS = idS;
+            this.name = name;
+            this.value = Math.Round(value, 2);
+            ValueS = this.value.ToString();
+            this.type = type;
+            this.measurementHistory = measurementHistory;
+            if(measurementHistory.Count != 5)
+            {
+                MeasurementHistory.Add(new MeasurementHistory());
+                MeasurementHistory.Add(new MeasurementHistory());
+                MeasurementHistory.Add(new MeasurementHistory());
+                MeasurementHistory.Add(new MeasurementHistory());
+                MeasurementHistory.Add(new MeasurementHistory());
+            }
         }
         public PowerConsumption(PowerConsumption powerConsumption)
         {
@@ -43,8 +74,25 @@ namespace NetworkService.Model
             value = Math.Round(powerConsumption.value, 2);
             ValueS = value.ToString();
             type = powerConsumption.type;
+            measurementHistory = powerConsumption.MeasurementHistory;
+            if(measurementHistory.Count != 5)
+            {
+                MeasurementHistory.Add(new MeasurementHistory());
+                MeasurementHistory.Add(new MeasurementHistory());
+                MeasurementHistory.Add(new MeasurementHistory());
+                MeasurementHistory.Add(new MeasurementHistory());
+                MeasurementHistory.Add(new MeasurementHistory());
+            }
         }
-
+        public ObservableCollection<MeasurementHistory> MeasurementHistory
+        {
+            get { return measurementHistory; }
+            set
+            {
+                measurementHistory = value;
+                OnPropertyChanged(nameof(MeasurementHistory));
+            }
+        }
         public int Id
         {
             get { return id; }
@@ -78,6 +126,31 @@ namespace NetworkService.Model
             set
             {
                 this.value = value;
+                if (skip || measurementHistory == null)
+                {
+                    if(measurementHistory.Count != 5)
+                    {
+                        MeasurementHistory.Add(new MeasurementHistory());
+                        MeasurementHistory.Add(new MeasurementHistory());
+                        MeasurementHistory.Add(new MeasurementHistory());
+                        MeasurementHistory.Add(new MeasurementHistory());
+                        MeasurementHistory.Add(new MeasurementHistory());
+                    }
+                    MeasurementHistory.Add(new MeasurementHistory(DateTime.Now.ToString("HH:mm"), this.value, 1));
+                    if (MeasurementHistory.Count > 5)
+                    {
+                        MeasurementHistory.RemoveAt(0); //obrisi  prvi (najraniji)
+                    }
+                    for (int i = 0, j = 5; i < 5; i++)
+                    {
+                        MeasurementHistory[i].PositionIndex = j--;
+                    }
+                }
+                else
+                {
+                    skip = false;
+                }
+                OnPropertyChanged(nameof(MeasurementHistory));
                 OnPropertyChanged("Value");
                 OnPropertyChanged("ValueS");
             }
