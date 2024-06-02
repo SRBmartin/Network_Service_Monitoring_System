@@ -39,9 +39,11 @@ namespace NetworkService.Helpers.Common
             {
                 WriteIndented = true,
                 DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-                ReferenceHandler = ReferenceHandler.IgnoreCycles
+                ReferenceHandler = ReferenceHandler.Preserve,
+                MaxDepth = 1024
             };
-            string jsonString = JsonSerializer.Serialize(entities, option);
+            //string jsonString = JsonSerializer.Serialize(entities, option);
+            string jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(entities, Newtonsoft.Json.Formatting.Indented);
             File.WriteAllText(filePath, jsonString);
         }
         public static ObservableCollection<LinesHolder> DeserializeEntitiesFromFileLines(string filePath = "../../Resource/json/linesConnections.json")
@@ -55,7 +57,8 @@ namespace NetworkService.Helpers.Common
             {
                 ReferenceHandler = ReferenceHandler.IgnoreCycles
             };
-            var result = JsonSerializer.Deserialize<ObservableCollection<LinesHolder>>(jsonString, options);
+            //var result = JsonSerializer.Deserialize<ObservableCollection<LinesHolder>>(jsonString, options);
+            var result = Newtonsoft.Json.JsonConvert.DeserializeObject<ObservableCollection<LinesHolder>>(jsonString);
             return result ?? new ObservableCollection<LinesHolder>();
         }
     }
