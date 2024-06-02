@@ -60,7 +60,7 @@ namespace NetworkService.Model
         }
         public double Diametar
         {
-            get { return (((value - 0.01) / (5.5 - 0.01)) * 56); }
+            get { return Math.Abs((((value - 0.01) / (5.5 - 0.01)) * 56)); }
         }
         public double CanvasRight
         {
