@@ -396,3 +396,9 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+NetworkService/NetworkService/NetworkService/Resource/json/entities.json
+NetworkService/NetworkService/NetworkService/Resource/json/cardEntities.json
+NetworkService/NetworkService/NetworkService/Resource/json/linesConnections.json
+NetworkService/NetworkService/NetworkService/Resource/json/cardEntities.json
+NetworkService/NetworkService/NetworkService/Resource/json/entities.json
+NetworkService/NetworkService/NetworkService/Resource/json/linesConnections.json
