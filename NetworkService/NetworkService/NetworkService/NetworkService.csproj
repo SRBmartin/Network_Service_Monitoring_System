@@ -106,6 +106,7 @@
     <Compile Include="Helpers\Common\TreeViewSelectionBehaviour.cs" />
     <Compile Include="Helpers\Interface\IConfirmationService.cs" />
     <Compile Include="Helpers\MyICommand.cs" />
+    <Compile Include="Helpers\StyleConverters\BackStyleConverter.cs" />
     <Compile Include="Helpers\StyleConverters\UndoStyleConverter.cs" />
     <Compile Include="Helpers\Styles\DisplayCardVisualRepresentation.cs" />
     <Compile Include="Helpers\UndoActionHolder.cs" />
@@ -277,6 +278,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resource\Images\AlarmWarning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Images\BackInactive.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\Images\BackActive.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

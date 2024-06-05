@@ -194,6 +194,59 @@
             </Setter>
         </Style>
 
+        <ImageBrush 
+            x:Key="back_inactive"
+            ImageSource="/Resource/Images/BackInactive.png"
+            Stretch="Uniform" />
+        <ImageBrush 
+            x:Key="back_active"
+            ImageSource="/Resource/Images/BackActive.png"
+            Stretch="Uniform" />
+
+        <Style x:Key="BackButtonUnavailableStyle" TargetType="{x:Type Button}">
+            <Setter Property="Height" Value="35" />
+            <Setter Property="Width"  Value="35" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Cursor" Value="No"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border 
+                           x:Name="border"
+                           Background="{StaticResource back_inactive}" 
+                           BorderThickness="0" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="BackButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Height" Value="35" />
+            <Setter Property="Width" Value="35" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border
+                            x:Name="border"
+                            Background="{StaticResource back_inactive}"
+                            BorderThickness="0" />
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="{StaticResource back_active}" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="{StaticResource back_inactive}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style x:Key="TerminalTextBox" TargetType="TextBox">
             <Setter Property="Template">
                 <Setter.Value>
