@@ -8,6 +8,7 @@ using Notification.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
@@ -274,7 +275,8 @@ namespace NetworkService.ViewModel
                 }
                 CardsVisual.Add(new DisplayCardVisualRepresentation());
             }
-            SerializationHandler.SerializeEntitiesToFile(cardsEntities, cardEntitiesSerializationPath);
+            //await Task.Run(async () => MainWindowViewModel.SaveCards(new ObservableCollection<PowerConsumption>(CardsEntities)));
+            MainWindowViewModel.SaveCards(new ObservableCollection<PowerConsumption>(CardsEntities));
         }
         private void OnCardDrop(string cardIndex)
         {
@@ -299,7 +301,8 @@ namespace NetworkService.ViewModel
                         RemoveFromEntitiesGroup(draggedItem);
                     }
                     CardsEntities[index] = new PowerConsumption(tmp);
-                    SerializationHandler.SerializeEntitiesToFile(cardsEntities, cardEntitiesSerializationPath);
+                    //await Task.Run(async () => MainWindowViewModel.SaveCards(new ObservableCollection<PowerConsumption>(CardsEntities)));
+                    MainWindowViewModel.SaveCards(new ObservableCollection<PowerConsumption>(CardsEntities));
                     CardsVisual.ToList().ForEach(cv => cv.StopConnecting());
                     selectedCardIndexFirst = -1;
                     selectedCardIndexSecond = -1;
@@ -379,7 +382,8 @@ namespace NetworkService.ViewModel
                     LinesOnRemoveFromCard(cardsEntities[index]);
                     CardsVisual[index].StopConnecting();
                     cardsEntities[index].SetDefaultCardValue();
-                    SerializationHandler.SerializeEntitiesToFile(CardsEntities, cardEntitiesSerializationPath);
+                    //await Task.Run(async () => MainWindowViewModel.SaveCards(new ObservableCollection<PowerConsumption>(CardsEntities)));
+                    MainWindowViewModel.SaveCards(new ObservableCollection<PowerConsumption>(CardsEntities));
                     CheckAlarmingValues();
                     Messenger.Default.Send<NotificationContent>(NotificationHandler.CreateNotification(NotificationType.Success, "Remove from card", "Removing entity from the card was successful."));
                 }
@@ -587,7 +591,7 @@ namespace NetworkService.ViewModel
                     }
                 }
                 CheckAlarmingValues();
-                Thread.Sleep(5000);
+                Thread.Sleep(2000);
             }
         }
 

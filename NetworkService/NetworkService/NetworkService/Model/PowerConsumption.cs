@@ -1,4 +1,5 @@
 ﻿using NetworkService.Helpers;
+using NetworkService.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -128,22 +129,26 @@ namespace NetworkService.Model
                 this.value = value;
                 if (skip || measurementHistory == null)
                 {
-                    if(measurementHistory.Count != 5)
+                    if (MainWindowViewModel.newValueIncoming)
                     {
-                        MeasurementHistory.Add(new MeasurementHistory());
-                        MeasurementHistory.Add(new MeasurementHistory());
-                        MeasurementHistory.Add(new MeasurementHistory());
-                        MeasurementHistory.Add(new MeasurementHistory());
-                        MeasurementHistory.Add(new MeasurementHistory());
-                    }
-                    MeasurementHistory.Add(new MeasurementHistory(DateTime.Now.ToString("HH:mm"), this.value, 1));
-                    if (MeasurementHistory.Count > 5)
-                    {
-                        MeasurementHistory.RemoveAt(0); //obrisi  prvi (najraniji)
-                    }
-                    for (int i = 0, j = 5; i < 5; i++)
-                    {
-                        MeasurementHistory[i].PositionIndex = j--;
+                        if (measurementHistory.Count != 5)
+                        {
+                            MeasurementHistory.Add(new MeasurementHistory());
+                            MeasurementHistory.Add(new MeasurementHistory());
+                            MeasurementHistory.Add(new MeasurementHistory());
+                            MeasurementHistory.Add(new MeasurementHistory());
+                            MeasurementHistory.Add(new MeasurementHistory());
+                        }
+                        MeasurementHistory.Add(new MeasurementHistory(DateTime.Now.ToString("HH:mm"), this.value, 1));
+                        if (MeasurementHistory.Count > 5)
+                        {
+                            MeasurementHistory.RemoveAt(0); //obrisi  prvi (najraniji)
+                        }
+                        for (int i = 0, j = 5; i < 5; i++)
+                        {
+                            MeasurementHistory[i].PositionIndex = j--;
+                        }
+                        MainWindowViewModel.newValueIncoming = false;
                     }
                 }
                 else

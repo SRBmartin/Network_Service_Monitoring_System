@@ -242,7 +242,8 @@
                 HorizontalAlignment="Stretch"
                 VerticalAlignment="Stretch"
                 IsHitTestVisible="False">
-            <Ellipse Width="{Binding SelectedEntity.MeasurementHistory[4].Diametar}"
+            <Ellipse x:Name="Circle0"
+                    Width="{Binding SelectedEntity.MeasurementHistory[4].Diametar}"
                      Height="{Binding SelectedEntity.MeasurementHistory[4].Diametar}"
                      Fill="{Binding SelectedEntity.MeasurementHistory[4].Background}"
                      StrokeThickness="1"

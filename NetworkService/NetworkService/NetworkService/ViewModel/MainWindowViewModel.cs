@@ -38,6 +38,8 @@ namespace NetworkService.ViewModel
         private NotificationManager notificationManager;
         private ConfirmationService _confirmationService;
 
+        public static bool newValueIncoming = false;
+
         public MainWindowViewModel()
         {
             Entities = SerializationHandler.DeserializeEntitiesFromFile();
@@ -181,6 +183,7 @@ namespace NetworkService.ViewModel
                         else
                         {
                             Console.WriteLine(incomming); //Na primer: "Entitet_1:272"
+                            newValueIncoming = true;
                             int index = int.Parse(incomming.Split(':')[0].Split('_')[1]);
                             float value = float.Parse(incomming.Split(':')[1]);
                             Entities[index].Value = value;

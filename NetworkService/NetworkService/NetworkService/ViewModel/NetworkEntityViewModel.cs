@@ -1,7 +1,6 @@
 ﻿using MVVMLight.Messaging;
 using NetworkService.Helpers;
 using NetworkService.Helpers.Common;
-using NetworkService.Helpers.Undo;
 using NetworkService.Model;
 using Notification.Wpf;
 using System;
@@ -258,7 +257,7 @@ namespace NetworkService.ViewModel
                 if (!MainWindowViewModel.Entities.Any(pc => pc.IdS.Equals(enteredPowerConsumption.IdS)))
                 {
                     MainWindowViewModel.Entities.Add(new PowerConsumption(enteredPowerConsumption));
-                    Messenger.Default.Send<UndoActionHolder>(new UndoActionHolder(enteredPowerConsumption, ActionType.Add));
+                    Messenger.Default.Send<UndoActionHolder>(new UndoActionHolder(new PowerConsumption(enteredPowerConsumption), ActionType.Add));
                     Messenger.Default.Send<bool>(true);
                     EnteredPowerConsumption.Type = availableTypes[0];
                     EnteredPowerConsumption.IdS = string.Empty;
