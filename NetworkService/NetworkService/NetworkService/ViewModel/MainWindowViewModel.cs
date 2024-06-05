@@ -32,13 +32,16 @@ namespace NetworkService.ViewModel
         public MyICommand<Window> ExitAppCommand { get; private set; }
         public MyICommand<string> NavigationCommand { get; private set; }
         private MyICommand undoActionCommand;
+        private MyICommand backCommand;
 
         private BindableBase currentViewModel;
+        private BindableBase lastView;
 
         private NotificationManager notificationManager;
         private ConfirmationService _confirmationService;
 
         public static bool newValueIncoming = false;
+        private bool firstNav = true;
 
         public MainWindowViewModel()
         {
@@ -49,6 +52,7 @@ namespace NetworkService.ViewModel
             ExitAppCommand = new MyICommand<Window>(ExitApp);
             NavigationCommand = new MyICommand<string>(Navigate);
             UndoActionCommand = new MyICommand(DoUndo);
+            BackCommand = new MyICommand(OnBack);
 
             networkEntityViewModel = new NetworkEntityViewModel();
             networkDisplayViewModel = new NetworkDisplayViewModel();
@@ -58,6 +62,7 @@ namespace NetworkService.ViewModel
             notificationManager = new NotificationManager();
             _confirmationService = new ConfirmationService();
             CurrentViewModel = startingViewModel;
+            LastView = null;
             Messenger.Default.Register<NotificationContent>(this, NotificationHandler.ShowToastNotification);
             Messenger.Default.Register<UndoActionHolder>(this, ReceiveUndoActionHolder);
         }
@@ -84,6 +89,18 @@ namespace NetworkService.ViewModel
             set
             {
                 SetProperty(ref currentViewModel, value);
+            }
+        }
+        public BindableBase LastView
+        {
+            get
+            {
+                return lastView;
+            }
+            set
+            {
+                lastView = value;
+                OnPropertyChanged(nameof(LastView));
             }
         }
         public TerminalViewModel TerminalViewModel
@@ -153,6 +170,17 @@ namespace NetworkService.ViewModel
             }
         }
 
+        public MyICommand BackCommand
+        {
+            get
+            {
+                return backCommand;
+            }
+            private set
+            {
+                backCommand = value;
+            }
+        }
         private void func(TcpListener tcp)
         {
             {
@@ -207,19 +235,29 @@ namespace NetworkService.ViewModel
 
         private void Navigate(string pageName)
         {
+            BindableBase tmp = currentViewModel;
+            switch (pageName)
             {
-                switch (pageName)
+                case "NetworkEntityView":
+                    CurrentViewModel = networkEntityViewModel;
+                    break;
+                case "NetworkDisplayView":
+                    CurrentViewModel = networkDisplayViewModel;
+                    Messenger.Default.Send<bool>(true);
+                    break;
+                case "MeasurementGraphView":
+                    CurrentViewModel = measurementGraphViewModel;
+                    break;
+            }
+            if (firstNav)
+            {
+                firstNav = false;
+            }
+            else
+            {
+                if (tmp != currentViewModel)
                 {
-                    case "NetworkEntityView":
-                        CurrentViewModel = networkEntityViewModel;
-                        break;
-                    case "NetworkDisplayView":
-                        CurrentViewModel = networkDisplayViewModel;
-                        Messenger.Default.Send<bool>(true);
-                        break;
-                    case "MeasurementGraphView":
-                        CurrentViewModel = measurementGraphViewModel;
-                        break;
+                    LastView = tmp;
                 }
             }
         }
@@ -267,6 +305,18 @@ namespace NetworkService.ViewModel
                         break;
                 }
                 UndoAction = new UndoActionHolder();
+            }
+        }
+        public void OnBack()
+        {
+            if(LastView != null)
+            {
+                CurrentViewModel = LastView;
+                if(LastView is NetworkDisplayViewModel)
+                {
+                    Messenger.Default.Send<bool>(true);
+                }
+                LastView = null;
             }
         }
         public static void SaveCards(ObservableCollection<PowerConsumption> entities)
