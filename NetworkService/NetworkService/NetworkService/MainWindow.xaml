@@ -39,6 +39,7 @@
             <views:MeasurementGraphView />
         </DataTemplate>
         <styleConverters:UndoStyleConverter x:Key="UndoStyleConverter" />
+        <styleConverters:BackStyleConverter x:Key="BackStyleConverter" />
     </Window.Resources>
     
     <Grid>
@@ -53,7 +54,8 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200" />
                 <ColumnDefinition Width="400" />
-                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="50" />
                 <ColumnDefinition Width="50"  />
                 <ColumnDefinition Width="50"  />
             </Grid.ColumnDefinitions>
@@ -171,7 +173,7 @@
             <!-- EXIT BUTTON -->
             <Button
                 x:Name="ExitButton"
-                Grid.Column="4"
+                Grid.Column="5"
                 Margin="0, 0, 5, 0"
                 Command="{Binding ExitAppCommand}"
                 CommandParameter="{Binding ElementName=MainWindowReference}"
@@ -194,7 +196,7 @@
 
             <Button
                 x:Name="UndoButton"
-                Grid.Column="3"
+                Grid.Column="4"
                 Command="{Binding UndoActionCommand}"
                 Style="{Binding UndoAction.ActionId, Converter={StaticResource UndoStyleConverter}}">
                 <Popup
@@ -212,21 +214,41 @@
                 </Popup>
             </Button>
 
+            <Button
+                x:Name="BackButton"
+                Grid.Column="3"
+                Command="{Binding BackCommand}"
+                Style="{Binding LastView, Converter={StaticResource BackStyleConverter}}">
+                <Popup
+                    Width="40"
+                    IsOpen="{Binding ElementName=BackButton, Path=IsMouseOver, Mode=OneWay}"
+                    PlacementTarget="{Binding ElementName=BackButton}"
+                    Style="{StaticResource PopupStyle}">
+                    <Grid>
+                        <Border Style="{StaticResource BorderStyle}">
+                            <TextBlock
+                                Style="{StaticResource PopupTextStyle}"
+                                Text="Back" />
+                        </Border>
+                    </Grid>
+                </Popup>
+            </Button>
+
             <ContentControl
                 Grid.Row="1"
                 Grid.Column="0"
-                Grid.ColumnSpan="5"
+                Grid.ColumnSpan="6"
                 Content="{Binding CurrentViewModel}" />
             <ContentControl
                 Grid.Row="2"
                 Grid.Column="0"
-                Grid.ColumnSpan="5"
+                Grid.ColumnSpan="6"
                 Margin="5"
                 Content="{Binding TerminalViewModel}"/>
             <Border
                 Grid.Row="3"
                 Grid.Column="0"
-                Grid.ColumnSpan="5"
+                Grid.ColumnSpan="6"
                 Margin="0"
                 CornerRadius="0, 0, 25, 25">
                 <Border.Background>
