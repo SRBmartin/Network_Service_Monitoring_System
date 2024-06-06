@@ -285,5 +285,8 @@
   <ItemGroup>
     <Resource Include="Resource\Images\BackActive.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resource\log\log.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -65,6 +65,7 @@ namespace NetworkService.ViewModel
             LastView = null;
             Messenger.Default.Register<NotificationContent>(this, NotificationHandler.ShowToastNotification);
             Messenger.Default.Register<UndoActionHolder>(this, ReceiveUndoActionHolder);
+            Messenger.Default.Register<CommandID>(this, HandleTerminalRequest);
         }
 
         public static ObservableCollection<PowerConsumption> Entities
@@ -216,6 +217,7 @@ namespace NetworkService.ViewModel
                             float value = float.Parse(incomming.Split(':')[1]);
                             Entities[index].Value = value;
                             SerializationHandler.SerializeEntitiesToFile(Entities);
+                            SerializationHandler.AddLogRecord(Entities[index].Id, value);
                         }
                     }, null);
                 }
@@ -283,6 +285,7 @@ namespace NetworkService.ViewModel
                                 SerializationHandler.SerializeEntitiesToFile(Entities);
                                 NotificationHandler.ShowToastNotification(NotificationHandler.CreateNotification(NotificationType.Success, "Undo", "Undo option was executed with success."));
                             }
+                            UndoAction = new UndoActionHolder();
                         }
                         else
                         {
@@ -297,6 +300,7 @@ namespace NetworkService.ViewModel
                             Messenger.Default.Send<bool>(true);
                             SerializationHandler.SerializeEntitiesToFile(Entities);
                             NotificationHandler.ShowToastNotification(NotificationHandler.CreateNotification(NotificationType.Success, "Undo", "Undo option was executed with success."));
+                            UndoAction = new UndoActionHolder();
                         }
                         else
                         {
@@ -304,7 +308,6 @@ namespace NetworkService.ViewModel
                         }
                         break;
                 }
-                UndoAction = new UndoActionHolder();
             }
         }
         public void OnBack()
@@ -349,8 +352,101 @@ namespace NetworkService.ViewModel
             //    System.IO.File.WriteAllText("../../Resource/json/cardEntities.json", jsonString);
             //});
         }
+        
+        private void HandleTerminalRequest(CommandID commandID)
+        {
+            string retStr = string.Empty;
+            if(commandID == CommandID.RequestUndoInfo)
+            {
+                retStr = "Are you sure you want to ";
+                if(undoAction.ActionId == ActionType.Add)
+                {
+                    retStr += $"remove the entity:\n{undoAction.Entity}\n(yes/no)";
+                }
+                else if(undoAction.ActionId == ActionType.Delete)
+                {
+                    retStr += $"add the entity:\n{undoAction.Entity}\n(yes/no)";
+                }
+                else
+                {
+                    retStr = "There is nothing to undo.";
+                }
+            }else if(commandID == CommandID.Undo)
+            {
+                if(undoAction.ActionId == ActionType.NoAction)
+                {
+                    retStr = "There is nothing to undo.";
+                }
+                else if(undoAction.ActionId == ActionType.Add)
+                {
+                    PowerConsumption toDelete = Entities.FirstOrDefault(e => e.Id == undoAction.Entity.Id);
+                    if(toDelete != null)
+                    {
+                        Entities.Remove(toDelete);
+                        Messenger.Default.Send<bool>(true);
+                        SerializationHandler.SerializeEntitiesToFile(Entities);
+                        retStr = "Undo action was executed with a success.";
+                    }
+                }else if(undoAction.ActionId == ActionType.Delete)
+                {
+                    Entities.Add(undoAction.Entity);
+                    Messenger.Default.Send<bool>(true);
+                    SerializationHandler.SerializeEntitiesToFile(Entities);
+                    retStr = "Undo Action was executed with a success.";
+                }
+                UndoAction = new UndoActionHolder();
+            }else if(commandID == CommandID.NavigateToNEntities)
+            {
+                if(CurrentViewModel is NetworkEntityViewModel)
+                {
+                    retStr = "You are already on that page.";
+                }
+                else
+                {
+                    LastView = CurrentViewModel;
+                    CurrentViewModel = networkEntityViewModel;
+                    retStr = "Page was changed with a success.";
+                }
+            }else if(commandID == CommandID.NavigateToNDisplay)
+            {
+                if(CurrentViewModel is NetworkDisplayViewModel)
+                {
+                    retStr = "You are already on that page.";
+                }
+                else
+                {
+                    LastView = CurrentViewModel;
+                    CurrentViewModel = networkDisplayViewModel;
+                    retStr = "Page was changed with a success.";
+                }
+            }else if(commandID == CommandID.NavigateToMGraph)
+            {
+                if(CurrentViewModel is MeasurementGraphViewModel)
+                {
+                    retStr = "You are already on that page.";
+                }
+                else
+                {
+                    LastView = CurrentViewModel;
+                    CurrentViewModel = measurementGraphViewModel;
+                    retStr = "Page was changed with a success.";
+                }
+            }else if(commandID == CommandID.GoBack)
+            {
+                if(LastView != null)
+                {
+                    OnBack();
+                    retStr = "Backing up...";
+                }
+                else
+                {
+                    retStr = "There is nowhere to go back.";
+                }
+            }
 
-            private void ExitApp(Window toClose)
+            Messenger.Default.Send<string>(retStr); 
+        }
+        private void ExitApp(Window toClose)
         {
             toClose.Close();
         }
