@@ -18,7 +18,7 @@ namespace NetworkService.Model
         public static readonly string NavCommandHelp = "[USAGE]~ nav [tab]\nTab => 0 - Network Entities, 1 - Network Display, 2 - Measurement Graph\n";
         public Terminal()
         {
-            TerminalContent = $"New terminal started at {DateTime.Now:yyyy/MM/dd hh:mm:ss}.\n";
+            TerminalContent = $"New terminal started at {DateTime.Now:yyyy/MM/dd HH:mm:ss}.\n";
             ConsoleContent = string.Empty;
         }
         public string TerminalContent

@@ -31,6 +31,7 @@
                 AutoGenerateColumns="False"
                 CanUserReorderColumns="False"
                 IsReadOnly="True"
+                SelectionMode="Single"
                 Style="{StaticResource DataGridNetworkEntities}"
                 ColumnHeaderStyle="{StaticResource DataGridNetworkEntitiesColumnHeaderStyle}">
                 <DataGrid.InputBindings>
@@ -126,7 +127,7 @@
                 PlacementTarget="{Binding ElementName=FilterButtonsGroup}"
                 Style="{StaticResource PopupStyle}">
                 <Grid>
-                    <Border Style="{StaticResource BorderStyle}" Padding="5">
+                    <Border Style="{StaticResource BorderStyle}" Padding="3">
                         <TextBlock 
                             Style="{StaticResource PopupTextStyleError}"
                             Text="{Binding CurrentFilter.ValidationErrors[Buttons]}"
@@ -149,6 +150,22 @@
                 </TextBox.InputBindings>
             </TextBox>
 
+            <Popup
+                Width="240"
+                IsOpen="{Binding ElementName=IdFilterTextBox, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=IdFilterTextBox}"
+                Style="{StaticResource PopupStyle}">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}" Padding="3">
+                        <TextBlock 
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Field for entity's ID:"
+                            TextWrapping="Wrap"
+                            MaxHeight="100" />
+                    </Border>
+                </Grid>
+            </Popup>
+
             <Image
                 x:Name="IdFilterErrorIcon"
                 Grid.Row="2"
@@ -165,7 +182,7 @@
                 PlacementTarget="{Binding ElementName=IdFilterTextBox}"
                 Style="{StaticResource PopupStyle}">
                 <Grid>
-                    <Border Style="{StaticResource BorderStyle}" Padding="5">
+                    <Border Style="{StaticResource BorderStyle}" Padding="3">
                         <TextBlock 
                             Style="{StaticResource PopupTextStyleError}"
                             Text="{Binding CurrentFilter.ValidationErrors[ID]}"
@@ -269,7 +286,7 @@
                     PlacementTarget="{Binding ElementName=AddTypeComboBox}"
                     Style="{StaticResource PopupStyle}">
                     <Grid>
-                        <Border Style="{StaticResource BorderStyle}" Padding="5">
+                        <Border Style="{StaticResource BorderStyle}" Padding="3">
                             <TextBlock 
                                 Style="{StaticResource PopupTextStyleError}"
                                 Text="{Binding EnteredPowerConsumption.ValidationErrors[Type]}"
@@ -292,6 +309,22 @@
                     </TextBox.InputBindings>
                 </TextBox>
 
+                <Popup
+                    Width="220"
+                    IsOpen="{Binding ElementName=AddIDTextBox, Path=IsMouseOver, Mode=OneWay}"
+                    PlacementTarget="{Binding ElementName=AddIDTextBox}"
+                    Style="{StaticResource PopupStyle}">
+                    <Grid>
+                        <Border Style="{StaticResource BorderStyle}" Padding="2">
+                            <TextBlock 
+                                Style="{StaticResource PopupTextStyle}"
+                                Text="Field for entity's ID:"
+                                TextWrapping="Wrap"
+                                MaxHeight="100" />
+                        </Border>
+                    </Grid>
+                </Popup>
+
                 <Image
                     x:Name="AddIdErrorIcon"
                     Grid.Row="1"
@@ -307,7 +340,7 @@
                     PlacementTarget="{Binding ElementName=AddIDTextBox}"
                     Style="{StaticResource PopupStyle}">
                     <Grid>
-                        <Border Style="{StaticResource BorderStyle}" Padding="5">
+                        <Border Style="{StaticResource BorderStyle}" Padding="3">
                             <TextBlock 
                                 Style="{StaticResource PopupTextStyleError}"
                                 Text="{Binding EnteredPowerConsumption.ValidationErrors[ID]}"
@@ -330,6 +363,22 @@
                     </TextBox.InputBindings>
                 </TextBox>
 
+                <Popup
+                    Width="250"
+                    IsOpen="{Binding ElementName=AddNameTextBox, Path=IsMouseOver, Mode=OneWay}"
+                    PlacementTarget="{Binding ElementName=AddNameTextBox}"
+                    Style="{StaticResource PopupStyle}">
+                    <Grid>
+                        <Border Style="{StaticResource BorderStyle}" Padding="3">
+                            <TextBlock 
+                                Style="{StaticResource PopupTextStyle}"
+                                Text="Field for entity's name:"
+                                TextWrapping="Wrap"
+                                MaxHeight="100" />
+                        </Border>
+                    </Grid>
+                </Popup>
+
                 <Image
                     x:Name="AddNameIconError"
                     Grid.Row="2"
@@ -345,7 +394,7 @@
                     PlacementTarget="{Binding ElementName=AddNameTextBox}"
                     Style="{StaticResource PopupStyle}">
                     <Grid>
-                        <Border Style="{StaticResource BorderStyle}" Padding="5">
+                        <Border Style="{StaticResource BorderStyle}" Padding="3">
                             <TextBlock 
                                 Style="{StaticResource PopupTextStyleError}"
                                 Text="{Binding EnteredPowerConsumption.ValidationErrors[Name]}"

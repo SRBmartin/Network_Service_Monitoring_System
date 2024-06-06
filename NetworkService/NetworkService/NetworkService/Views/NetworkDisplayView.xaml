@@ -124,7 +124,8 @@
                                Style="{StaticResource RoundedImageConnectNetworkDisplay}"
                                Visibility="{Binding CardsVisual[0].ConnectArrowVisibility}"
                                Grid.Column="1" />
-                        <Image Source="pack://application:,,,/Resource/Images/AlarmWarning.png"
+                        <Image x:Name="AlarmIcon0"
+                               Source="pack://application:,,,/Resource/Images/AlarmWarning.png"
                                Style="{StaticResource RoundedImageAlarmWarningDisplay}"
                                Visibility="{Binding CardsVisual[0].AlarmVisibility}"/>
 
@@ -183,6 +184,20 @@
                     </Border>
                 </Grid>
             </Popup>
+            <Popup
+                Width="140"
+                IsOpen="{Binding ElementName=AlarmIcon0, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=AlarmIcon0}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Alarming value" />
+                    </Border>
+                </Grid>
+            </Popup>
             <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
             <!-- -=-=-=-=-DRUGI KVADRATIC-=-=-=-=-=- -->
             <Border 
@@ -235,7 +250,8 @@
                            Style="{StaticResource RoundedImageConnectNetworkDisplay}"
                            Visibility="{Binding CardsVisual[1].ConnectArrowVisibility}"
                            Grid.Column="1" />
-                        <Image Source="pack://application:,,,/Resource/Images/AlarmWarning.png"
+                        <Image x:Name="AlarmIcon1"
+                               Source="pack://application:,,,/Resource/Images/AlarmWarning.png"
                                Style="{StaticResource RoundedImageAlarmWarningDisplay}"
                                Visibility="{Binding CardsVisual[1].AlarmVisibility}"/>
 
@@ -294,6 +310,20 @@
                     </Border>
                 </Grid>
             </Popup>
+            <Popup
+                Width="140"
+                IsOpen="{Binding ElementName=AlarmIcon1, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=AlarmIcon1}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Alarming value" />
+                    </Border>
+                </Grid>
+            </Popup>
             <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
             <!-- -=-=-=-=-Treci KVADRATIC-=-=-=-=-=- -->
             <Border 
@@ -346,7 +376,8 @@
                            Style="{StaticResource RoundedImageConnectNetworkDisplay}"
                            Visibility="{Binding CardsVisual[2].ConnectArrowVisibility}"
                            Grid.Column="1" />
-                        <Image Source="pack://application:,,,/Resource/Images/AlarmWarning.png"
+                        <Image x:Name="AlarmIcon2"
+                               Source="pack://application:,,,/Resource/Images/AlarmWarning.png"
                                Style="{StaticResource RoundedImageAlarmWarningDisplay}"
                                Visibility="{Binding CardsVisual[2].AlarmVisibility}"/>
 
@@ -405,6 +436,20 @@
                     </Border>
                 </Grid>
             </Popup>
+            <Popup
+                Width="140"
+                IsOpen="{Binding ElementName=AlarmIcon2, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=AlarmIcon2}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Alarming value" />
+                    </Border>
+                </Grid>
+            </Popup>
             <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
             <!-- -=-=-=-=-Cetvrti KVADRATIC-=-=-=-=-=- -->
             <Border 
@@ -457,7 +502,8 @@
                            Style="{StaticResource RoundedImageConnectNetworkDisplay}"
                            Visibility="{Binding CardsVisual[3].ConnectArrowVisibility}"
                            Grid.Column="1" />
-                        <Image Source="pack://application:,,,/Resource/Images/AlarmWarning.png"
+                        <Image x:Name="AlarmIcon3"
+                               Source="pack://application:,,,/Resource/Images/AlarmWarning.png"
                                Style="{StaticResource RoundedImageAlarmWarningDisplay}"
                                Visibility="{Binding CardsVisual[3].AlarmVisibility}"/>
 
@@ -516,6 +562,20 @@
                     </Border>
                 </Grid>
             </Popup>
+            <Popup
+                Width="140"
+                IsOpen="{Binding ElementName=AlarmIcon3, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=AlarmIcon3}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Alarming value" />
+                    </Border>
+                </Grid>
+            </Popup>
             <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
             <!-- -=-=-=-=-PETI KVADRATIC-=-=-=-=-=- -->
             <Border 
@@ -568,7 +628,8 @@
                            Style="{StaticResource RoundedImageConnectNetworkDisplay}"
                            Visibility="{Binding CardsVisual[4].ConnectArrowVisibility}"
                            Grid.Column="1" />
-                        <Image Source="pack://application:,,,/Resource/Images/AlarmWarning.png"
+                        <Image x:Name="AlarmIcon4"
+                               Source="pack://application:,,,/Resource/Images/AlarmWarning.png"
                                Style="{StaticResource RoundedImageAlarmWarningDisplay}"
                                Visibility="{Binding CardsVisual[4].AlarmVisibility}"/>
 
@@ -627,6 +688,20 @@
                     </Border>
                 </Grid>
             </Popup>
+            <Popup
+                Width="140"
+                IsOpen="{Binding ElementName=AlarmIcon4, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=AlarmIcon4}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Alarming value" />
+                    </Border>
+                </Grid>
+            </Popup>
             <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
             <!-- -=-=-=-=-SESTI KVADRATIC-=-=-=-=-=- -->
             <Border 
@@ -679,7 +754,8 @@
                            Style="{StaticResource RoundedImageConnectNetworkDisplay}"
                            Visibility="{Binding CardsVisual[5].ConnectArrowVisibility}"
                            Grid.Column="1" />
-                        <Image Source="pack://application:,,,/Resource/Images/AlarmWarning.png"
+                        <Image x:Name="AlarmIcon5"
+                               Source="pack://application:,,,/Resource/Images/AlarmWarning.png"
                                Style="{StaticResource RoundedImageAlarmWarningDisplay}"
                                Visibility="{Binding CardsVisual[5].AlarmVisibility}"/>
 
@@ -738,6 +814,20 @@
                     </Border>
                 </Grid>
             </Popup>
+            <Popup
+                Width="140"
+                IsOpen="{Binding ElementName=AlarmIcon5, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=AlarmIcon5}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Alarming value" />
+                    </Border>
+                </Grid>
+            </Popup>
             <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
             <!-- -=-=-=-=-SEDMI KVADRATIC-=-=-=-=-=- -->
             <Border 
@@ -790,7 +880,8 @@
                             Style="{StaticResource RoundedImageConnectNetworkDisplay}"
                             Visibility="{Binding CardsVisual[6].ConnectArrowVisibility}"
                             Grid.Column="1" />
-                        <Image Source="pack://application:,,,/Resource/Images/AlarmWarning.png"
+                        <Image x:Name="AlarmIcon6"
+                               Source="pack://application:,,,/Resource/Images/AlarmWarning.png"
                                Style="{StaticResource RoundedImageAlarmWarningDisplay}"
                                Visibility="{Binding CardsVisual[6].AlarmVisibility}"/>
 
@@ -849,6 +940,20 @@
                     </Border>
                 </Grid>
             </Popup>
+            <Popup
+                Width="140"
+                IsOpen="{Binding ElementName=AlarmIcon6, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=AlarmIcon6}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Alarming value" />
+                    </Border>
+                </Grid>
+            </Popup>
             <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
             <!-- -=-=-=-=-OSMI KVADRATIC-=-=-=-=-=- -->
             <Border 
@@ -901,7 +1006,8 @@
                            Style="{StaticResource RoundedImageConnectNetworkDisplay}"
                            Visibility="{Binding CardsVisual[7].ConnectArrowVisibility}"
                            Grid.Column="1" />
-                        <Image Source="pack://application:,,,/Resource/Images/AlarmWarning.png"
+                        <Image x:Name="AlarmIcon7"
+                               Source="pack://application:,,,/Resource/Images/AlarmWarning.png"
                                Style="{StaticResource RoundedImageAlarmWarningDisplay}"
                                Visibility="{Binding CardsVisual[7].AlarmVisibility}"/>
 
@@ -960,6 +1066,20 @@
                     </Border>
                 </Grid>
             </Popup>
+            <Popup
+                Width="140"
+                IsOpen="{Binding ElementName=AlarmIcon7, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=AlarmIcon7}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Alarming value" />
+                    </Border>
+                </Grid>
+            </Popup>
             <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
             <!-- -=-=-=-=-DEVETI KVADRATIC-=-=-=-=-=- -->
             <Border 
@@ -1012,7 +1132,8 @@
                            Style="{StaticResource RoundedImageConnectNetworkDisplay}"
                            Visibility="{Binding CardsVisual[8].ConnectArrowVisibility}"
                            Grid.Column="1" />
-                        <Image Source="pack://application:,,,/Resource/Images/AlarmWarning.png"
+                        <Image x:Name="AlarmIcon8"
+                               Source="pack://application:,,,/Resource/Images/AlarmWarning.png"
                                Style="{StaticResource RoundedImageAlarmWarningDisplay}"
                                Visibility="{Binding CardsVisual[8].AlarmVisibility}"/>
 
@@ -1071,6 +1192,20 @@
                     </Border>
                 </Grid>
             </Popup>
+            <Popup
+                Width="140"
+                IsOpen="{Binding ElementName=AlarmIcon8, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=AlarmIcon8}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Alarming value" />
+                    </Border>
+                </Grid>
+            </Popup>
             <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
             <!-- -=-=-=-=-DESETI KVADRATIC-=-=-=-=-=- -->
             <Border 
@@ -1123,7 +1258,8 @@
                            Style="{StaticResource RoundedImageConnectNetworkDisplay}"
                            Visibility="{Binding CardsVisual[9].ConnectArrowVisibility}"
                            Grid.Column="1" />
-                        <Image Source="pack://application:,,,/Resource/Images/AlarmWarning.png"
+                        <Image x:Name="AlarmIcon9"
+                               Source="pack://application:,,,/Resource/Images/AlarmWarning.png"
                                Style="{StaticResource RoundedImageAlarmWarningDisplay}"
                                Visibility="{Binding CardsVisual[9].AlarmVisibility}"/>
 
@@ -1182,6 +1318,20 @@
                     </Border>
                 </Grid>
             </Popup>
+            <Popup
+                Width="140"
+                IsOpen="{Binding ElementName=AlarmIcon9, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=AlarmIcon9}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Alarming value" />
+                    </Border>
+                </Grid>
+            </Popup>
             <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
             <!-- -=-=-=-=-JEDANAESTI KVADRATIC-=-=-=-=-=- -->
             <Border 
@@ -1234,7 +1384,8 @@
                            Style="{StaticResource RoundedImageConnectNetworkDisplay}"
                            Visibility="{Binding CardsVisual[10].ConnectArrowVisibility}"
                            Grid.Column="1" />
-                        <Image Source="pack://application:,,,/Resource/Images/AlarmWarning.png"
+                        <Image x:Name="AlarmIcon10"
+                               Source="pack://application:,,,/Resource/Images/AlarmWarning.png"
                                Style="{StaticResource RoundedImageAlarmWarningDisplay}"
                                Visibility="{Binding CardsVisual[10].AlarmVisibility}"/>
 
@@ -1293,6 +1444,20 @@
                     </Border>
                 </Grid>
             </Popup>
+            <Popup
+                Width="140"
+                IsOpen="{Binding ElementName=AlarmIcon10, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=AlarmIcon10}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Alarming value" />
+                    </Border>
+                </Grid>
+            </Popup>
             <!-- =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
             <!-- -=-=-=-=-DVANAESTI KVADRATIC-=-=-=-=-=- -->
             <Border 
@@ -1345,7 +1510,8 @@
                            Style="{StaticResource RoundedImageConnectNetworkDisplay}"
                            Visibility="{Binding CardsVisual[11].ConnectArrowVisibility}"
                            Grid.Column="1" />
-                        <Image Source="pack://application:,,,/Resource/Images/AlarmWarning.png"
+                        <Image x:Name="AlarmIcon11"
+                               Source="pack://application:,,,/Resource/Images/AlarmWarning.png"
                                Style="{StaticResource RoundedImageAlarmWarningDisplay}"
                                Visibility="{Binding CardsVisual[11].AlarmVisibility}"/>
 
@@ -1401,6 +1567,20 @@
                         <TextBlock
                             Style="{StaticResource PopupTextStyle}"
                             Text="Remove from card" />
+                    </Border>
+                </Grid>
+            </Popup>
+            <Popup
+                Width="140"
+                IsOpen="{Binding ElementName=AlarmIcon11, Path=IsMouseOver, Mode=OneWay}"
+                PlacementTarget="{Binding ElementName=AlarmIcon11}"
+                Style="{StaticResource PopupStyle}"
+                Placement="Top">
+                <Grid>
+                    <Border Style="{StaticResource BorderStyle}">
+                        <TextBlock
+                            Style="{StaticResource PopupTextStyle}"
+                            Text="Alarming value" />
                     </Border>
                 </Grid>
             </Popup>
