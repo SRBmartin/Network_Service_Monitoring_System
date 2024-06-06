@@ -13,6 +13,9 @@ namespace NetworkService.Model
         private string terminalContent;
         private string consoleContent;
 
+        public static readonly string AddCommandHelp = "[USAGE]~ add [type] [id] [name]\nType => 0 - Interval Meter, 1 - Smart meter\n";
+        public static readonly string DeleteCommandHelp = "[USAGE]~ delete [id]\n";
+        public static readonly string NavCommandHelp = "[USAGE]~ nav [tab]\nTab => 0 - Network Entities, 1 - Network Display, 2 - Measurement Graph\n";
         public Terminal()
         {
             TerminalContent = $"New terminal started at {DateTime.Now:yyyy/MM/dd hh:mm:ss}.\n";
@@ -33,8 +36,21 @@ namespace NetworkService.Model
             set
             {
                 consoleContent = value;
-                OnPropertyChanged("ConsoleContent");
+                OnPropertyChanged(nameof(ConsoleContent));
             }
+        }
+        public bool ConsumeTerminalCommand()
+        {
+            if (consoleContent.Trim().Length > 0)
+            {
+                TerminalContent += $"admin@root:~$ {ConsoleContent}\n";
+                return true;
+            }
+            return false;
+        }
+        public void ClearTerminalConsole()
+        {
+            ConsoleContent = string.Empty;
         }
     }
 }

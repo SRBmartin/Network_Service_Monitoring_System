@@ -1,4 +1,5 @@
 ﻿using NetworkService.Helpers;
+using NetworkService.Helpers.Common;
 using NetworkService.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,7 @@ namespace NetworkService.Model
         public PowerConsumption(string idS, string name, MeterType type)
         {
             this.idS = idS;
+            int.TryParse(idS, out id);
             this.name = name;
             this.type = type;
             value = Math.Round(GetRandomNumberValue(0.01, 5.50), 2);
