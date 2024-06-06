@@ -42,7 +42,6 @@ namespace NetworkService.Helpers.Common
                 ReferenceHandler = ReferenceHandler.Preserve,
                 MaxDepth = 1024
             };
-            //string jsonString = JsonSerializer.Serialize(entities, option);
             string jsonString = Newtonsoft.Json.JsonConvert.SerializeObject(entities, Newtonsoft.Json.Formatting.Indented);
             File.WriteAllText(filePath, jsonString);
         }
@@ -57,9 +56,15 @@ namespace NetworkService.Helpers.Common
             {
                 ReferenceHandler = ReferenceHandler.IgnoreCycles
             };
-            //var result = JsonSerializer.Deserialize<ObservableCollection<LinesHolder>>(jsonString, options);
             var result = Newtonsoft.Json.JsonConvert.DeserializeObject<ObservableCollection<LinesHolder>>(jsonString);
             return result ?? new ObservableCollection<LinesHolder>();
+        }
+        public static void AddLogRecord(int id, double value, string filePath = "../../Resource/log/log.txt")
+        {
+            using(StreamWriter sw = new StreamWriter(filePath, true))
+            {
+                sw.WriteLine($"[{DateTime.Now:dd/MM/yyyy : HH:mm:ss}] ID: {id} received value of {value} kWh.");
+            }
         }
     }
 }
