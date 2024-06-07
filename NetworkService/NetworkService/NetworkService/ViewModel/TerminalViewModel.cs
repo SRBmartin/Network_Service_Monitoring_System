@@ -4,6 +4,7 @@ using NetworkService.Helpers.Common;
 using NetworkService.Model;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,7 +24,9 @@ namespace NetworkService.ViewModel
         NavigateToMGraph,
         WaitingNavigationChange,
         GoBack,
-        WaitingGoBackResponse
+        WaitingGoBackResponse,
+        WaitingFilterResponse,
+        FilterOff
     }
     public class TerminalViewModel : BindableBase
     {
@@ -229,6 +232,103 @@ namespace NetworkService.ViewModel
                     case "back":
                         expectingResponse = CommandID.WaitingGoBackResponse;
                         Messenger.Default.Send<CommandID>(CommandID.GoBack);
+                        break;
+                    case "filteroff":
+                        if(commandParts.Length != 1)
+                        {
+                            Terminal.TerminalContent += Terminal.FilterOffCommandHelp;
+                        }
+                        else
+                        {
+                            Messenger.Default.Send<CommandID>(CommandID.FilterOff);
+                        }
+                        break;
+                    case "filter":
+                        if(commandParts.Length < 2)
+                        {
+                            Terminal.TerminalContent += Terminal.FilterOnCommandHelp;
+                        }
+                        else
+                        {
+                            if (!int.TryParse(commandParts[1], out int type))
+                            {
+                                Terminal.TerminalContent += "~ Type must be a number.\n";
+                            }
+                            else
+                            {
+                                if(type < -1 && type > 1)
+                                {
+                                    Terminal.TerminalContent += "~ Type must in range [-1, 1].\n";
+                                }
+                                else
+                                {
+                                    FilterHandler fh = new FilterHandler();
+                                    MeterType mType = new MeterType(string.Empty, string.Empty);
+                                    switch(type)
+                                    {
+                                        case -1:
+                                            mType = new MeterType("Select the meter type", "");
+                                            break;
+                                        case 0:
+                                            mType = new MeterType("Interval Meter", "pack://application:,,,/Resource/Images/IntervalMeter.png");
+                                            break;
+                                        case 1:
+                                            mType = new MeterType("Smart Meter", "pack://application:,,,/Resource/Images/SmartMeter.png");
+                                            break;
+                                    }
+                                    fh.Type = mType;
+                                    if(commandParts.Length > 2)
+                                    {
+                                        if (commandParts[2].Contains("<") && commandParts[2].Contains(">"))
+                                        {
+                                            Terminal.TerminalContent += "~ You can only choose < or >.\n";
+                                        }
+                                        else
+                                        {
+                                            if (commandParts[2].Contains("<"))
+                                            {
+                                                fh.IsLessThan = true;
+                                            }
+                                            else if (commandParts[2].Contains(">"))
+                                            {
+                                                fh.IsGreaterThan = true;
+                                            }
+                                            if (commandParts[2].Contains("="))
+                                            {
+                                                fh.IsEqual = true;
+                                            }
+                                            if (commandParts.Length == 4 && !(fh.IsEqual || fh.IsGreaterThan || fh.IsLessThan))
+                                            {
+                                                Terminal.TerminalContent += "~ You must put <, > or = if you enter the ID.\n";
+                                                break;
+                                            }
+                                            if (commandParts.Length == 4)
+                                            {
+                                                if (!int.TryParse(commandParts[3], out int id))
+                                                {
+                                                    Terminal.TerminalContent += "~ ID must be a number.\n";
+                                                }
+                                                else
+                                                {
+                                                    fh.IdS = id.ToString();
+                                                    Messenger.Default.Send<FilterHandler>(new FilterHandler(fh));
+                                                    Terminal.TerminalContent += "~ Filter was applied.\n";
+                                                }
+                                            }
+                                            else
+                                            {
+                                                Terminal.TerminalContent += "~ You must enter the ID because you enter <, > or =.\n";
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Messenger.Default.Send<FilterHandler>(new FilterHandler(fh));
+                                        Terminal.TerminalContent += "~ Filter was applied.\n";
+                                    }
+                                }
+                            }
+                        }
                         break;
                     default:
                         Terminal.TerminalContent += "~ That command doesn't exist.\n";

@@ -68,6 +68,7 @@ namespace NetworkService.ViewModel
             this._confirmationService = new ConfirmationService();
             Messenger.Default.Register<PowerConsumption>(this, ResolveUndoActiveFilter);
             Messenger.Default.Register<CommandID>(this, ResolveTerminalCommand);
+            Messenger.Default.Register<FilterHandler>(this, ResolveTerminalFilter);
         }
         public ObservableCollection<PowerConsumption> FilteredEntities
         {
@@ -386,13 +387,27 @@ namespace NetworkService.ViewModel
 
         public void ResolveTerminalCommand(CommandID commandID)
         {
+            string retStr = string.Empty;
             if(commandID == CommandID.RefreshFilter)
             {
                 if (activeFilter != null)
                 {
                     FilteredEntities = activeFilter.FilterAction(MainWindowViewModel.Entities);
                 }
+            }else if(commandID == CommandID.FilterOff)
+            {
+                if(activeFilter != null)
+                {
+                    activeFilter = null;
+                    FilteredEntities = MainWindowViewModel.Entities;
+                }
             }
+        }
+
+        public void ResolveTerminalFilter(FilterHandler fh)
+        {
+            ActiveFilter = fh;
+            FilteredEntities = ActiveFilter.FilterAction(MainWindowViewModel.Entities);
         }
 
     }
